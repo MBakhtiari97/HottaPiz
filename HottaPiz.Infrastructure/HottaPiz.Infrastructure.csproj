@@ -11,11 +11,14 @@
     <Folder Include="Security\" />
     <Folder Include="Services\Interfaces\" />
     <Folder Include="Services\Implementations\" />
-    <Folder Include="Utilities\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HottaPiz.DataLayer\HottaPiz.DataLayer.csproj" />
   </ItemGroup>
 
 </Project>
