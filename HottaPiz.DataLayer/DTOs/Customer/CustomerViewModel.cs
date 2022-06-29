@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace HottaPiz.DataLayer.DTOs.Customer
 {
+    #nullable disable
     public class RegisterCustomerVM
     {
         [Display(Name = "First Name")]
