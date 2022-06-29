@@ -5,9 +5,9 @@ VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HottaPiz.Web", "HottaPiz\HottaPiz.Web.csproj", "{D897AE16-F428-4DF3-B794-BAC1678D23EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HottaPiz.Infrastructure", "HottaPiz.Infrastructure\HottaPiz.Infrastructure.csproj", "{8F86DFC6-3656-41C6-96C5-BA5B4CFA5162}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HottaPiz.Infrastructure", "HottaPiz.Infrastructure\HottaPiz.Infrastructure.csproj", "{8F86DFC6-3656-41C6-96C5-BA5B4CFA5162}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HottaPiz.DataLayer", "HottaPiz.DataLayer\HottaPiz.DataLayer.csproj", "{A20FB17C-2F68-4347-B2DE-38459ED566D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HottaPiz.DataLayer", "HottaPiz.DataLayer\HottaPiz.DataLayer.csproj", "{A20FB17C-2F68-4347-B2DE-38459ED566D1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

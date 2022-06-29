@@ -1,20 +1,25 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using HottaPiz.DataLayer.Entities.Pizza;
+using HottaPiz.DataLayer.Repositories.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace HottaPiz.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
+        private readonly IGenericRepository<Pizza> _repository;
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public IndexModel(IGenericRepository<Pizza> repository)
         {
-            _logger = logger;
+            _repository = repository;
         }
+
+        [BindProperty]
+        public IQueryable<Pizza> Pizzas { get; set; }
 
         public void OnGet()
         {
-
+            Pizzas = _repository.GetAll();
         }
     }
 }
