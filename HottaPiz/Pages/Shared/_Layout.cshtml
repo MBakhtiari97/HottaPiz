@@ -23,8 +23,26 @@
                             <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Pizzas">Pizza's</a>
                         </li>
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark text-end" asp-area="" asp-page="/Login">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark text-end" asp-area="" asp-page="/Register">Register</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark text-end" asp-area="" asp-page="/Logout">Logout</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark text-end" asp-area="" asp-page="/MyOrders">My Orders</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
@@ -38,11 +56,14 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2022 - HottaPiz - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            &copy; 2022 - HottaPiz - <a asp-area="" asp-page="/ContactUs">Contact Us</a>
         </div>
     </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 
