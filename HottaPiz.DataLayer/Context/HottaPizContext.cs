@@ -25,6 +25,7 @@ namespace HottaPiz.DataLayer.Context
         public DbSet<PizzaToIngredients> PizzaToIngredients { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetails> OrdersDetails { get; set; }
+        public DbSet<Customer> Customer { get; set; }
 
         #endregion
 

@@ -3,6 +3,7 @@ using HottaPiz.DataLayer.DTOs.Customer;
 using HottaPiz.DataLayer.Entities.Customer;
 using HottaPiz.DataLayer.Repositories.Interfaces;
 using HottaPiz.Infrastructure.Security.PasswordHasher;
+using HottaPiz.Infrastructure.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -10,12 +11,12 @@ namespace HottaPiz.Web.Pages
 {
     public class RegisterCustomerModel : PageModel
     {
-        private readonly IGenericRepository<Customer> _repository;
+        private ICustomerServices _customerServices;
         private readonly INotyfService _notyfService;
 
-        public RegisterCustomerModel(IGenericRepository<Customer> repository, INotyfService notyfService)
+        public RegisterCustomerModel(ICustomerServices customerServices, INotyfService notyfService)
         {
-            _repository = repository;
+            _customerServices = customerServices;
             _notyfService = notyfService;
         }
 
@@ -40,16 +41,16 @@ namespace HottaPiz.Web.Pages
                 Password = PasswordHelper.EncodePasswordMd5(Register.CustomerPassword)
             };
 
-            if (await _repository.CreateEntityAsync(newCustomer))
+            if (await _customerServices.RegisterCustomer(newCustomer))
             {
-                await _repository.SaveChangesAsync();
                 _notyfService.Success("Registered Completed !");
+                return Redirect("/Login");
             }
             else
             {
-                _notyfService.Error("Registered Failed !");
+                _notyfService.Error("Phone Number Is Currently Existed!");
+                return Page();
             }
-            return Redirect("/Login");
         }
     }
 }
