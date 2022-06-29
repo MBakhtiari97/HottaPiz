@@ -112,7 +112,7 @@ namespace HottaPiz.DataLayer.Repositories.Implementations
 
         #region Save Changes
 
-        public async Task SaveChangesAsync(int id)
+        public async Task SaveChangesAsync()
         {
             await _context.SaveChangesAsync();
         }

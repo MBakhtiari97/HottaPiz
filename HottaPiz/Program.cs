@@ -1,6 +1,10 @@
+using AspNetCoreHero.ToastNotification;
+using AspNetCoreHero.ToastNotification.Extensions;
 using HottaPiz.DataLayer.Context;
 using HottaPiz.DataLayer.Repositories.Implementations;
 using HottaPiz.DataLayer.Repositories.Interfaces;
+using HottaPiz.Infrastructure.Services.Implementations;
+using HottaPiz.Infrastructure.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,8 +25,11 @@ builder.Services.AddDbContext<HottaPizContext>(options =>
 #region IoC
 
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+builder.Services.AddScoped<ICustomerServices,CustomerServices>();
 
 #endregion
+
+builder.Services.AddNotyf(config => { config.DurationInSeconds = 5; config.IsDismissable = true; config.Position = NotyfPosition.TopRight; });
 
 var app = builder.Build();
 
@@ -35,9 +42,12 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseNotyf();
 
 app.UseAuthorization();
 

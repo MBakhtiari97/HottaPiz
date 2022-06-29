@@ -1,0 +1,31 @@
+﻿@page "/Login"
+@model HottaPiz.Web.Pages.LoginCustomerModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+
+<div class="container">
+    <div>
+        <form asp-page="LoginCustomerModel" method="post">
+            <div class="row">
+                <div class="col-122">
+                    <label asp-for="Login.CustomerPhoneNumber"></label>
+                    <input type="text" asp-for="Login.CustomerPhoneNumber" class="form-control"/>
+                    <span asp-validation-for="Login.CustomerPhoneNumber" class="text-danger"></span>
+                </div>
+                <div class="col-12">
+                    <label asp-for="Login.CustomerPassword"></label>
+                    <input type="password" asp-for="Login.CustomerPassword" class="form-control"/>
+                    <span asp-validation-for="Login.CustomerPassword" class="text-danger"></span>
+                </div>
+                <div class="col-12">
+                    <input type="checkbox" asp-for="Login.RememberMe"/> Remember Me !
+                </div>
+                <div class="col-6 mt-2">
+                   <input type="submit" value="Login" class="btn btn-outline-success rounded-pill"/>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

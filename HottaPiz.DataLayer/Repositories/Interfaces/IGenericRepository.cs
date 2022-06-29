@@ -17,6 +17,6 @@ namespace HottaPiz.DataLayer.Repositories.Interfaces
         public bool UpdateEntity(TEntity entity);
         public bool RemoveEntity(TEntity entity);
         public Task<bool> RemoveEntityAsync(int id);
-        public Task SaveChangesAsync(int id);
+        public Task SaveChangesAsync();
     }
 }

@@ -46,10 +46,6 @@ namespace HottaPiz.DataLayer.ModelBuilderExtension
                 new Pizza { Id = 9, PizzaBasePrice = 5, PizzaImageName = "Supreme Pizza.png", PizzaName = "Supreme Pizza" },
                 new Pizza { Id = 10, PizzaBasePrice = 5, PizzaImageName = "The Works Pizza.png", PizzaName = "The Works Pizza" }
             );
-
-            modelBuilder.Entity<Customer>().HasData(
-                new Customer { Id = 1, CustomerEmailAddress = "admin@admin.com", CustomerFirstName = "admin", CustomerLastName = "admin", CustomerPhoneNumber = "01185966985", IsAdmin = true, CustomerFirstAddress = "US , NY , Times Square , 187 Ave , No.33" }
-            );
         }
     }
 }

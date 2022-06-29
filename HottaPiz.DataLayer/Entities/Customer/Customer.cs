@@ -27,7 +27,10 @@ namespace HottaPiz.DataLayer.Entities.Customer
         public string CustomerPhoneNumber { get; set; }
 
         [MaxLength(255)] 
-        public string? CustomerEmailAddress { get; set; } 
+        public string? CustomerEmailAddress { get; set; }
+
+        [MaxLength(50)]
+        public string Password { get; set; }
 
         [MaxLength(800)]
         public string CustomerFirstAddress { get; set; }

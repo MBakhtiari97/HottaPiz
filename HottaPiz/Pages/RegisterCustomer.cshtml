@@ -1,43 +1,54 @@
 ﻿@page "/Register"
 @model HottaPiz.Web.Pages.RegisterCustomerModel
 @{
+    ViewData["Title"] = "Register";
 }
 
 <div class="container">
     <div>
         <form asp-page="RegisterCustomerModel" method="post">
             <div class="row">
-                <div class="col-6">
+                <div class="col-12">
                     <label asp-for="Register.CustomerFirstName"></label>
                     <input type="text" asp-for="Register.CustomerFirstName" class="form-control"/>
-                    <span asp-validation-for="Register.CustomerFirstName"></span>
+                    <span asp-validation-for="Register.CustomerFirstName" class="text-danger"></span>
                 </div>
-                <div class="col-6">
+                <div class="col-12">
                     <label asp-for="Register.CustomerLastName"></label>
                     <input type="text" asp-for="Register.CustomerLastName" class="form-control"/>
-                    <span asp-validation-for="Register.CustomerLastName"></span>
+                    <span asp-validation-for="Register.CustomerLastName" class="text-danger"></span>
                 </div>
-                <div class="col-6">
+                <div class="col-12">
                     <label asp-for="Register.CustomerPhoneNumber"></label>
                     <input type="text" asp-for="Register.CustomerPhoneNumber" class="form-control"/>
-                    <span asp-validation-for="Register.CustomerPhoneNumber"></span>
+                    <span asp-validation-for="Register.CustomerPhoneNumber" class="text-danger"></span>
                 </div>
-                <div class="col-6">
+                <div class="col-12">
                     <label asp-for="Register.CustomerEmailAddress"></label>
                     <input type="text" asp-for="Register.CustomerEmailAddress" class="form-control"/>
-                    <span asp-validation-for="Register.CustomerEmailAddress"></span>
+                    <span asp-validation-for="Register.CustomerEmailAddress" class="text-danger"></span>
                 </div>
-                <div class="col-6">
+                <div class="col-12">
+                    <label asp-for="Register.CustomerPassword"></label>
+                    <input type="password" asp-for="Register.CustomerPassword" class="form-control"/>
+                    <span asp-validation-for="Register.CustomerPassword" class="text-danger"></span>
+                </div>
+                <div class="col-12">
+                    <label asp-for="Register.CustomerConfirmPassword"></label>
+                    <input type="password" asp-for="Register.CustomerConfirmPassword" class="form-control"/>
+                    <span asp-validation-for="Register.CustomerConfirmPassword" class="text-danger"></span>
+                </div>
+                <div class="col-12">
                     <label asp-for="Register.CustomerFirstAddress"></label>
                     <textarea asp-for="Register.CustomerFirstAddress" class="form-control"></textarea>
-                    <span asp-validation-for="Register.CustomerFirstAddress"></span>
+                    <span asp-validation-for="Register.CustomerFirstAddress" class="text-danger"></span>
                 </div>
-                <div class="col-6">
+                <div class="col-12">
                     <label asp-for="Register.CustomerSecondAddress"></label>
                     <textarea asp-for="Register.CustomerSecondAddress" class="form-control"></textarea>
-                    <span asp-validation-for="Register.CustomerSecondAddress"></span>
+                    <span asp-validation-for="Register.CustomerSecondAddress" class="text-danger"></span>
                 </div>
-                <div class="col-6 mt-2">
+                <div class="col-12 mt-2">
                    <input type="submit" value="Register" class="btn btn-outline-success rounded-pill"/>
                 </div>
             </div>
