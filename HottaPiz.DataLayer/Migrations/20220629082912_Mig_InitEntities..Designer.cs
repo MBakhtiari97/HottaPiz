@@ -4,6 +4,7 @@ using HottaPiz.DataLayer.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HottaPiz.DataLayer.Migrations
 {
     [DbContext(typeof(HottaPizContext))]
-    partial class HottaPizContextModelSnapshot : ModelSnapshot
+    [Migration("20220629082912_Mig_InitEntities.")]
+    partial class Mig_InitEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -149,8 +151,6 @@ namespace HottaPiz.DataLayer.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.HasIndex("PizzaId");
-
                     b.ToTable("OrdersDetails");
                 });
 
@@ -263,12 +263,6 @@ namespace HottaPiz.DataLayer.Migrations
                     b.HasOne("HottaPiz.DataLayer.Entities.Order.Order", null)
                         .WithMany()
                         .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("HottaPiz.DataLayer.Entities.Pizza.Pizza", null)
-                        .WithMany()
-                        .HasForeignKey("PizzaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

@@ -1,4 +1,6 @@
 using HottaPiz.DataLayer.Context;
+using HottaPiz.DataLayer.Repositories.Implementations;
+using HottaPiz.DataLayer.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,10 +8,21 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 
+#region Context
+
 builder.Services.AddDbContext<HottaPizContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("HottaPizConnection"));
 });
+
+
+#endregion
+
+#region IoC
+
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
+#endregion
 
 var app = builder.Build();
 
