@@ -1,5 +1,46 @@
-﻿@page
+﻿@page "/Register"
 @model HottaPiz.Web.Pages.RegisterCustomerModel
 @{
 }
 
+<div class="container">
+    <div>
+        <form asp-page="RegisterCustomerModel" method="post">
+            <div class="row">
+                <div class="col-6">
+                    <label asp-for="Register.CustomerFirstName"></label>
+                    <input type="text" asp-for="Register.CustomerFirstName" class="form-control"/>
+                    <span asp-validation-for="Register.CustomerFirstName"></span>
+                </div>
+                <div class="col-6">
+                    <label asp-for="Register.CustomerLastName"></label>
+                    <input type="text" asp-for="Register.CustomerLastName" class="form-control"/>
+                    <span asp-validation-for="Register.CustomerLastName"></span>
+                </div>
+                <div class="col-6">
+                    <label asp-for="Register.CustomerPhoneNumber"></label>
+                    <input type="text" asp-for="Register.CustomerPhoneNumber" class="form-control"/>
+                    <span asp-validation-for="Register.CustomerPhoneNumber"></span>
+                </div>
+                <div class="col-6">
+                    <label asp-for="Register.CustomerEmailAddress"></label>
+                    <input type="text" asp-for="Register.CustomerEmailAddress" class="form-control"/>
+                    <span asp-validation-for="Register.CustomerEmailAddress"></span>
+                </div>
+                <div class="col-6">
+                    <label asp-for="Register.CustomerFirstAddress"></label>
+                    <textarea asp-for="Register.CustomerFirstAddress" class="form-control"></textarea>
+                    <span asp-validation-for="Register.CustomerFirstAddress"></span>
+                </div>
+                <div class="col-6">
+                    <label asp-for="Register.CustomerSecondAddress"></label>
+                    <textarea asp-for="Register.CustomerSecondAddress" class="form-control"></textarea>
+                    <span asp-validation-for="Register.CustomerSecondAddress"></span>
+                </div>
+                <div class="col-6 mt-2">
+                   <input type="submit" value="Register" class="btn btn-outline-success rounded-pill"/>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
