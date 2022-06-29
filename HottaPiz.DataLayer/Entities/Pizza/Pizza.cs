@@ -24,8 +24,9 @@ namespace HottaPiz.DataLayer.Entities.Pizza
         public string PizzaName { get; set; }
         [MaxLength(50)]
         public string PizzaCode { get; set; }
-        public decimal PizzaBasePrice { get; set; } = 3;
+        public decimal PizzaBasePrice { get; set; }
         public decimal PizzaTotalPrice { get; set; }
+        public string Description { get; set; }
         [MaxLength(255)]
         public string PizzaImageName { get; set; }
         public DateTime CreateDate { get; set; } = DateTime.Now;

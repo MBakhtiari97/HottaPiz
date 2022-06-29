@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using HottaPiz.DataLayer.Entities.Customer;
 using HottaPiz.DataLayer.Entities.Order;
 using HottaPiz.DataLayer.Entities.Pizza;
+using HottaPiz.DataLayer.ModelBuilderExtension;
 using Microsoft.EntityFrameworkCore;
 
 namespace HottaPiz.DataLayer.Context
@@ -74,6 +75,13 @@ namespace HottaPiz.DataLayer.Context
                 .HasQueryFilter(pti => !pti.IsDelete);
 
             #endregion
+
+            #region Seed Data
+
+            modelBuilder.Seed();
+
+            #endregion
+
 
             base.OnModelCreating(modelBuilder);
         }

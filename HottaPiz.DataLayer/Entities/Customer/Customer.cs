@@ -23,8 +23,6 @@ namespace HottaPiz.DataLayer.Entities.Customer
         [MaxLength(50)]
         public string CustomerLastName { get; set; }
 
-        public int CustomerSubscriptionNumber { get; set; }
-
         [MaxLength(50)]
         public string CustomerPhoneNumber { get; set; }
 
@@ -38,6 +36,7 @@ namespace HottaPiz.DataLayer.Entities.Customer
         public string? CustomerSecondAddress { get; set; }
 
         public DateTime CustomerRegisterDate { get; set; } = DateTime.Now;
+        public bool IsAdmin { get; set; }
 
         #endregion
     }
