@@ -32,5 +32,15 @@ namespace HottaPiz.Web.Tests
             Assert.AreEqual(expected,actual);
         }
 
+        [TestMethod]
+        public void ShouldReturnValidSavePath()
+        {
+            //Arrange
+            var expected = "G:\\HottaPiz\\HottaPiz\\HottaPiz\\bin\\Debug\\net6.0/wwwroot/images/pizza.png";
+            //Act
+            var actual = PathGenerator.GetSaveAndDeletePizzaImage("pizza.png");
+            //Assert
+            Assert.AreEqual(expected, actual);
+        }
     }
 }

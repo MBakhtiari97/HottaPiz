@@ -1,6 +1,8 @@
 using AspNetCoreHero.ToastNotification.Abstractions;
 using HottaPiz.DataLayer.DTOs.Pizza;
+using HottaPiz.Infrastructure.Extensions.Validator;
 using HottaPiz.Infrastructure.Services.Interfaces;
+using HottaPiz.Infrastructure.Utilities.PathTools;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -20,11 +22,49 @@ namespace HottaPiz.Web.Pages.Pizza
         public UpdatePizzaVM Pizza { get; set; }
 
         [BindProperty]
-        public IFormFile PizzaNewImage { get; set; }
+        public IFormFile? PizzaNewImage { get; set; }
 
         public void OnGet(int id)
         {
             Pizza = _pizzaServices.GetUpdatePizzaVMById(id);
+        }
+
+        public async Task<IActionResult> OnPost()
+        {
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+
+            if (PizzaNewImage?.Length > 0 && PizzaNewImage.IsImage())
+            {
+                //Creating new image
+                using (var stream = new FileStream(PathGenerator.GetSaveAndDeletePizzaImage(PizzaNewImage.FileName), FileMode.Create))
+                {
+                    PizzaNewImage.CopyTo(stream);
+                }
+
+                //Deleting old image
+                var oldImagePath = PathGenerator.GetSaveAndDeletePizzaImage(Pizza.PizzaImageName);
+                if (System.IO.File.Exists(oldImagePath) && Pizza.PizzaImageName!="Default.png")
+                {
+                    System.IO.File.Delete(oldImagePath);
+                }
+
+                Pizza.PizzaImageName = PizzaNewImage.FileName;
+            }
+
+
+            if (await _pizzaServices.UpdatePizzaAsync(Pizza))
+            {
+                _notyfService.Success("Pizza Details Updated !");
+                return Redirect("/");
+            }
+            else
+            {
+                _notyfService.Error("Something Went Wrong !");
+                return Page();
+            }
         }
     }
 }

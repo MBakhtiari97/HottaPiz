@@ -12,5 +12,14 @@ namespace HottaPiz.Infrastructure.Utilities.PathTools
         {
             return $"/images/{imageName}";
         }
+
+        public static string GetSaveAndDeletePizzaImage(string imageName)
+        {
+            var path = Path.Combine(Directory.GetCurrentDirectory()
+                                    + "/wwwroot"
+                                    + "/images"
+                                    + "/"+ imageName);
+            return path;
+        }
     }
 }

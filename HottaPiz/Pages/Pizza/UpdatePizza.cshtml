@@ -12,6 +12,7 @@
     <div>
         <form asp-page="UpdatePizza" method="post" enctype="multipart/form-data">
             <input type="hidden" asp-for="Pizza.Id" />
+            <input type="hidden" asp-for="Pizza.PizzaImageName" />
             <div class="row">
                 <div class="col-12 my-2">
                     <label asp-for="Pizza.PizzaName"></label>
@@ -45,14 +46,7 @@
     </div>
 </div>
 
-@* @section Scripts *@
-@* { *@
-@*     <script> *@
-@*         function changeImage() { *@
-@*             var img = document.getElementById("imgTag"); *@
-@*             var newImg = document.getElementById("newImg"); *@
-@* *@
-@*             img.src = newImg.src; *@
-@*         } *@
-@*     </script> *@
-@* } *@
+@section Scripts
+{
+    
+}
