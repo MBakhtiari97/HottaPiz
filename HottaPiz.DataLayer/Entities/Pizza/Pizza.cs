@@ -22,22 +22,14 @@ namespace HottaPiz.DataLayer.Entities.Pizza
 
         [MaxLength(50)]
         public string PizzaName { get; set; }
-        [MaxLength(50)]
-        public string PizzaCode { get; set; }
         public decimal PizzaBasePrice { get; set; }
         public decimal PizzaTotalPrice { get; set; }
-        public string Description { get; set; }
+        public string? Description { get; set; } = string.Empty;
         [MaxLength(255)]
         public string PizzaImageName { get; set; }
         public DateTime CreateDate { get; set; } = DateTime.Now;
 
         #endregion
-
-        // #region Relations
-        //
-        // public virtual List<PizzaToIngredients> PizzaToIngredients { get; set; }
-        //
-        // #endregion
 
     }
 }

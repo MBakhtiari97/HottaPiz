@@ -16,3 +16,7 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.imgBigSize {
+    max-width: 300px;
+}

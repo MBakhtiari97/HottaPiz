@@ -1,0 +1,58 @@
+﻿@page "/Pizza/Update/{id}"
+@using HottaPiz.Infrastructure.Utilities.PathTools
+@model HottaPiz.Web.Pages.Pizza.UpdatePizzaModel
+@{
+    ViewData["Title"] = $"Update Pizza {Model.Pizza.PizzaName}";
+}
+<div class="container text-center">
+    <h2>Update @Model.Pizza.PizzaName</h2>
+</div>
+
+<div class="container">
+    <div>
+        <form asp-page="UpdatePizza" method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="Pizza.Id" />
+            <div class="row">
+                <div class="col-12 my-2">
+                    <label asp-for="Pizza.PizzaName"></label>
+                    <input type="text" asp-for="Pizza.PizzaName" class="form-control" />
+                    <span asp-validation-for="Pizza.PizzaName" class="text-danger"></span>
+                </div>
+                <div class="col-12 my-2">
+                    <label asp-for="Pizza.PizzaTotalPrice"></label>
+                    <input type="text" asp-for="Pizza.PizzaTotalPrice" class="form-control" />
+                    <span asp-validation-for="Pizza.PizzaTotalPrice" class="text-danger"></span>
+                </div>
+                <div class="col-12 my-2">
+                    <label asp-for="Pizza.Description"></label>
+                    <textarea asp-for="Pizza.Description" class="form-control"></textarea>
+                    <span asp-validation-for="Pizza.Description" class="text-danger"></span>
+                </div><hr/>
+                <div class="col-12 my-2">
+                    <label asp-for="Pizza.PizzaImageName"></label>
+                    <img src="@PathGenerator.GetPizzaImageAddress(Model.Pizza.PizzaImageName)" class="imgBigSize img-thumbnail mb-4"/>
+                </div><hr/>
+                <div class="col-12">
+                    <label>Select New Image</label>
+                    <input type="file" class="form-control" asp-for="PizzaNewImage"/>
+                </div>
+                <div class="col-12 mt-4">
+                    <input type="submit" value="Update" class="btn btn-outline-success rounded-pill" />
+                    <a href="/" class="btn btn-outline-secondary rounded-pill">Return To Menu</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@* @section Scripts *@
+@* { *@
+@*     <script> *@
+@*         function changeImage() { *@
+@*             var img = document.getElementById("imgTag"); *@
+@*             var newImg = document.getElementById("newImg"); *@
+@* *@
+@*             img.src = newImg.src; *@
+@*         } *@
+@*     </script> *@
+@* } *@
