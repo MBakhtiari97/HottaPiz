@@ -1,4 +1,6 @@
 ﻿@page
+@using HottaPiz.Infrastructure.Utilities.PathTools
+@using Microsoft.AspNetCore.Mvc.TagHelpers
 @model IndexModel
 @{
     ViewData["Title"] = "Pizza's";
@@ -7,11 +9,11 @@
     <div class="bg-secondary">
         <div class="row p-5"> 
             <div class="col-6">
-                <img src="/images/pizza-three.png" class="w-75" alt="Create Your Own Pizza" />
+                <img src="@PathGenerator.GetPizzaImageAddress("pizza-three.png")" class="w-75" alt="Create Your Own Pizza" />
             </div>
             <div class="col-6 p-5">
                 <h4 class="mt-5">Create Your Own Pizza !</h4>
-                <a class="btn btn-primary rounded-pill btn-lg" asp-area="" asp-page="">Let's Start !</a>
+                <a class="btn btn-primary rounded-pill btn-lg" href="/CreateCustom">Let's Start !</a>
             </div>
         </div>
     </div>
@@ -23,7 +25,7 @@
             @foreach (var pizza in Model.Pizzas)
             {
                 <div class="col-4 my-5">
-                    <img src="/images/@pizza.PizzaImageName" alt="@pizza.PizzaName" class="w-100"/>
+                    <img src="@PathGenerator.GetPizzaImageAddress(pizza.PizzaImageName)" alt="@pizza.PizzaName" class="w-100"/>
                     <h4 class="my-4"><b>@pizza.PizzaName</b></h4>
                     <a class="btn rounded-pill btn-primary">Add To Order</a>
                 </div>

@@ -1,4 +1,5 @@
 ﻿using HottaPiz.Infrastructure.Utilities.Generator;
+using HottaPiz.Infrastructure.Utilities.PathTools;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace HottaPiz.Web.Tests
@@ -19,5 +20,17 @@ namespace HottaPiz.Web.Tests
             //Assert
             Assert.IsNotNull(generatedNumber);
         }
+
+        [TestMethod]
+        public void ShouldReturnImagePath()
+        {
+            //Arrange
+            var expected = "/images/pizza.png";
+            //Act
+            var actual = PathGenerator.GetPizzaImageAddress("pizza.png");
+            //Assert
+            Assert.AreEqual(expected,actual);
+        }
+
     }
 }
