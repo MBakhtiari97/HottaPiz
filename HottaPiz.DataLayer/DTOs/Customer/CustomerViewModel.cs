@@ -68,4 +68,6 @@ namespace HottaPiz.DataLayer.DTOs.Customer
         public bool RememberMe { get; set; }
 
     }
+
+    
 }

@@ -28,6 +28,7 @@
                 <div class="col-4 my-5">
                     <img src="@PathGenerator.GetPizzaImageAddress(pizza.PizzaImageName)" alt="@pizza.PizzaName" class="w-100"/>
                     <h4 class="my-4"><b>@pizza.PizzaName</b></h4>
+                    <h5 class="my-4"><b>@pizza.PizzaTotalPrice $</b></h5>
                     <a class="btn rounded-pill btn-primary">Add To Order</a>
                     @if(User.Identity.IsAuthenticated && bool.Parse(User.FindFirstValue("IsAdmin")))
                     {

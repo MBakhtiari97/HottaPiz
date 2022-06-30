@@ -7,6 +7,7 @@ using HottaPiz.DataLayer.Context;
 using HottaPiz.DataLayer.DTOs.Pizza;
 using HottaPiz.DataLayer.Entities.Pizza;
 using HottaPiz.Infrastructure.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace HottaPiz.Infrastructure.Services.Implementations
 {
@@ -83,6 +84,32 @@ namespace HottaPiz.Infrastructure.Services.Implementations
             {
                 return false;
             }
+        }
+
+        public async Task<List<PizzaIngredientsVM>> GetPizzasIngredients()
+        {
+            IQueryable<PizzaIngredientsVM> ingredients = _context.PizzasIngredients
+                .Select(pi => new PizzaIngredientsVM()
+                {
+                    IngredientPrice = pi.IngredientPrice,
+                    IngredientId = pi.Id,
+                    IngredientName = pi.IngredientTitle
+                });
+            return await ingredients.ToListAsync();
+        }
+
+        public async Task<bool> CreateCustomPizzaIngredients(int pizzaId, List<int> selectedIngredientsIds)
+        {
+            foreach (var id in selectedIngredientsIds)
+            {
+                await _context.PizzaToIngredients.AddAsync(new PizzaToIngredients()
+                {
+                    PizzaId = pizzaId,
+                    PizzaIngredientId = id
+                });
+            }
+
+            return true;
         }
     }
 }

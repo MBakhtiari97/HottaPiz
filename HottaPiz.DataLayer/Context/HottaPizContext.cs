@@ -26,6 +26,7 @@ namespace HottaPiz.DataLayer.Context
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetails> OrdersDetails { get; set; }
         public DbSet<Customer> Customer { get; set; }
+        public DbSet<CustomPizza> CustomPizzas { get; set; }
 
         #endregion
 
@@ -57,6 +58,16 @@ namespace HottaPiz.DataLayer.Context
                 .HasOne<Pizza>()
                 .WithMany()
                 .HasForeignKey(o => o.PizzaId);
+
+            modelBuilder.Entity<PizzaToIngredients>()
+                .HasOne<CustomPizza>()
+                .WithMany()
+                .HasForeignKey(o => o.PizzaId);
+
+            modelBuilder.Entity<CustomPizza>()
+                .HasOne<Customer>()
+                .WithMany()
+                .HasForeignKey(o => o.CustomerId);
 
             #endregion
 

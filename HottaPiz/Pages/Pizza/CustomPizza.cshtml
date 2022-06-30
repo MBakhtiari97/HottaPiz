@@ -1,0 +1,26 @@
+﻿@page "/PizzaCreator"
+@using HottaPiz.Infrastructure.Utilities.PathTools
+@model HottaPiz.Web.Pages.Pizza.CustomPizzaModel
+@{
+    ViewData["Title"] = "Pizza Creator";
+}
+
+<div class="container text-white">
+    <a class="btn btn-outline-secondary mb-2">Back To Menu</a>
+    <div class="bg-secondary p-3">
+        <div class="row">
+            <div class="col-5 ms-5">
+                <img src="@PathGenerator.GetPizzaImageAddress("pizza-three.png")" alt="Pizza Creator" class="w-100" />
+            </div>
+            <div class="col-5 ms-5">
+                <form asp-action="CustomPizzaModel" method="post">
+                    @foreach (var item in Model.Ingredients)
+                    {
+                        <input type="checkbox" value="@item.IngredientId" name="SelectedIngredients" /> @item.IngredientName <br />
+                    }
+                    <input class="btn btn-primary mt-5" type="submit" value="Save And Order"/>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

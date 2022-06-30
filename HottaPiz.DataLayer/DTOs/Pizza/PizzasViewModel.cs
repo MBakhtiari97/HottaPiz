@@ -49,4 +49,23 @@ namespace HottaPiz.DataLayer.DTOs.Pizza
         [Display(Name = "Pizza Image")]
         public string? PizzaImageName { get; set; }
     }
+
+    public class PizzaIngredientsVM
+    {
+        public int IngredientId { get; set; }
+        public string IngredientName { get; set; }
+        public decimal IngredientPrice { get; set; }
+
+        public static implicit operator PizzaIngredientsVM(List<PizzaIngredientsVM> v)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class CustomerPizzasVM
+    {
+        public int PizzaId { get; set; }
+        public string PizzaName { get; set; }
+        public decimal PizzaPrice { get; set; }
+    }
 }
