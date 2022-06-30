@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using AspNetCoreHero.ToastNotification.Abstractions;
 using HottaPiz.DataLayer.DTOs.Pizza;
 using HottaPiz.Infrastructure.Services.Interfaces;
@@ -35,7 +36,28 @@ namespace HottaPiz.Web.Pages.Pizza
 
         public async Task<IActionResult> OnPostAsync()
         {
-            return null;
+            if (!ModelState.IsValid)
+                return Page();
+
+            Pizzas.CustomerId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier.ToString()));
+            var createdCustomPizzaId = await _pizzaServices.CreateCustomPizza(Pizzas);
+
+            if (createdCustomPizzaId != null)
+            {
+                if (await _pizzaServices.CreateCustomPizzaIngredients(createdCustomPizzaId, SelectedIngredients))
+                {
+                    await _pizzaServices.UpdateCustomPizzaPrice(createdCustomPizzaId, SelectedIngredients);
+                    _notyfService.Success("Your Customized Pizza Created Successfully , You Can Order It By My Custom Pizzas Panel !");
+                    return Redirect("/Customer/MyPizzas");
+                }
+
+                _notyfService.Error("Failed To Create Your Pizza !");
+                return Page();
+            }
+
+            _notyfService.Error("Something Went Wrong !");
+            return Page();
+
         }
     }
 }

@@ -17,5 +17,12 @@ namespace HottaPiz.Infrastructure.Services.Interfaces
 
         public Task<List<PizzaIngredientsVM>> GetPizzasIngredients();
         public Task<bool> CreateCustomPizzaIngredients(int pizzaId , List<int> selectedIngredientsIds);
+        public Task<int> CreateCustomPizza(CustomerPizzasVM pizza);
+
+        public Task UpdateCustomPizzaPrice(int pizzaId, List<int> ingredientsIds);
+        public decimal GetIngredientPriceById(int id);
+
+        public Task<CustomPizza?> GetCustomPizzaById(int id);
+
     }
 }

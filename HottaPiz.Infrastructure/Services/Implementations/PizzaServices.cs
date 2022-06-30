@@ -100,16 +100,72 @@ namespace HottaPiz.Infrastructure.Services.Implementations
 
         public async Task<bool> CreateCustomPizzaIngredients(int pizzaId, List<int> selectedIngredientsIds)
         {
-            foreach (var id in selectedIngredientsIds)
+            try
             {
-                await _context.PizzaToIngredients.AddAsync(new PizzaToIngredients()
+                foreach (var id in selectedIngredientsIds)
                 {
-                    PizzaId = pizzaId,
-                    PizzaIngredientId = id
-                });
+                    await _context.PizzaToIngredients.AddAsync(new PizzaToIngredients()
+                    {
+                        PizzaId = pizzaId,
+                        PizzaIngredientId = id
+                    });
+                }
+
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public async Task<int> CreateCustomPizza(CustomerPizzasVM pizza)
+        {
+            try
+            {
+                var newPizza = new CustomPizza()
+                {
+                    CustomerId = pizza.CustomerId,
+                    PizzaName = pizza.PizzaName
+                };
+
+                await _context.CustomPizzas.AddAsync(newPizza);
+                await _context.SaveChangesAsync();
+
+                return newPizza.Id;
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+
+        public async Task UpdateCustomPizzaPrice(int pizzaId, List<int> ingredientsIds)
+        {
+            var pizza = await GetCustomPizzaById(pizzaId);
+            var totalPrice = (decimal)0.00;
+
+            foreach (var id in ingredientsIds)
+            {
+                totalPrice += GetIngredientPriceById(id);
             }
 
-            return true;
+            pizza.PizzaTotalPrice = totalPrice;
+            await _context.SaveChangesAsync();
+        }
+
+        public decimal GetIngredientPriceById(int id)
+        {
+            return _context.PizzasIngredients
+                .Single(pi => pi.Id == id)
+                .IngredientPrice;
+        }
+
+        public async Task<CustomPizza?> GetCustomPizzaById(int id)
+        {
+            return await _context.CustomPizzas
+                .FindAsync(id);
         }
     }
 }

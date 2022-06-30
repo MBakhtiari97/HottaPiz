@@ -9,7 +9,7 @@ namespace HottaPiz.DataLayer.DTOs.Pizza
 {
     public class UpdatePizzaVM
     {
-        #nullable disable
+#nullable disable
         public int Id { get; set; }
 
         [Display(Name = "Pizza Name")]
@@ -31,7 +31,7 @@ namespace HottaPiz.DataLayer.DTOs.Pizza
 
     public class CreatePizzaVM
     {
-        #nullable disable
+#nullable disable
 
         [Display(Name = "Pizza Name")]
         [Required(ErrorMessage = "Please Enter {0}")]
@@ -56,16 +56,14 @@ namespace HottaPiz.DataLayer.DTOs.Pizza
         public string IngredientName { get; set; }
         public decimal IngredientPrice { get; set; }
 
-        public static implicit operator PizzaIngredientsVM(List<PizzaIngredientsVM> v)
-        {
-            throw new NotImplementedException();
-        }
     }
 
     public class CustomerPizzasVM
     {
-        public int PizzaId { get; set; }
+        public int CustomerId { get; set; }
+        [Display(Name = "Pizza Name")]
+        [Required(ErrorMessage = "Please Enter {0}")]
+        [MaxLength(50, ErrorMessage = "Length Is Too Long")]
         public string PizzaName { get; set; }
-        public decimal PizzaPrice { get; set; }
     }
 }

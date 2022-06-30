@@ -14,11 +14,21 @@
             </div>
             <div class="col-5 ms-5">
                 <form asp-action="CustomPizzaModel" method="post">
-                    @foreach (var item in Model.Ingredients)
-                    {
-                        <input type="checkbox" value="@item.IngredientId" name="SelectedIngredients" /> @item.IngredientName <br />
-                    }
-                    <input class="btn btn-primary mt-5" type="submit" value="Save And Order"/>
+                    <div class="col-12">
+                        <label asp-for="Pizzas.PizzaName"></label>
+                        <input type="text" asp-for="Pizzas.PizzaName" class="form-control"/>
+                        <span asp-validation-for="Pizzas.PizzaName" class="text-danger"></span>
+                    </div><br/>
+                    <div class="col-12">
+                        <label><b>What would you like to have ?</b></label><br/>
+                        @foreach (var item in Model.Ingredients)
+                        {
+                            <input type="checkbox" value="@item.IngredientId" name="SelectedIngredients"/>
+                            @item.IngredientName
+                            <br/>
+                        }
+                    </div>
+                    <input class="btn btn-primary mt-3" type="submit" value="Save And Order"/>
                 </form>
             </div>
         </div>
