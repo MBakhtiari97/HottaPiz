@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -41,6 +43,10 @@
                             </li>
                         }
                     </ul>
+                    @if(User.Identity.IsAuthenticated && bool.Parse(User.FindFirstValue("IsAdmin")))
+                    {
+                        <a class="btn rounded-pill btn-success" href="/Pizza/Create">Create New Pizza</a>
+                    }
                 </div>
             </div>
         </nav>

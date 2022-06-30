@@ -29,7 +29,7 @@ namespace HottaPiz.Web.Pages.Pizza
             Pizza = _pizzaServices.GetUpdatePizzaVMById(id);
         }
 
-        public async Task<IActionResult> OnPost()
+        public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {

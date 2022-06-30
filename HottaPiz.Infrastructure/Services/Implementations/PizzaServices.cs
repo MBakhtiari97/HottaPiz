@@ -59,5 +59,30 @@ namespace HottaPiz.Infrastructure.Services.Implementations
 
                 }).Single();
         }
+
+        public async Task<bool> CreatePizzaAsync(CreatePizzaVM pizzaDetails)
+        {
+            try
+            {
+                var newPizza = new Pizza()
+                {
+                    PizzaImageName = pizzaDetails.PizzaImageName,
+                    CreateDate = DateTime.Now,
+                    Description = pizzaDetails.Description,
+                    PizzaTotalPrice = pizzaDetails.PizzaTotalPrice,
+                    PizzaBasePrice = 5,
+                    PizzaName = pizzaDetails.PizzaName
+                };
+
+                await _context.Pizzas.AddAsync(newPizza);
+                await _context.SaveChangesAsync();
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }

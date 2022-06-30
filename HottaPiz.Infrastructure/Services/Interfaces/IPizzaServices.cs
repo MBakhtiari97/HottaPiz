@@ -13,5 +13,6 @@ namespace HottaPiz.Infrastructure.Services.Interfaces
         public Task<bool> UpdatePizzaAsync(UpdatePizzaVM pizzaDetails);
         public Pizza GetPizzaById(int pizzaId);
         public UpdatePizzaVM GetUpdatePizzaVMById(int pizzaId);
+        public Task<bool> CreatePizzaAsync(CreatePizzaVM pizzaDetails);
     }
 }

@@ -1,0 +1,42 @@
+﻿@page "/Pizza/Create"
+@using HottaPiz.Infrastructure.Utilities.PathTools
+@model HottaPiz.Web.Pages.Pizza.CreateNewPizzaModel
+@{
+    ViewData["Title"] = "New Pizza";
+}
+
+<div class="container text-center">
+    <h2>New Pizza</h2>
+</div>
+
+<div class="container">
+    <div>
+        <form asp-page="CreateNewPizza" method="post" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-12 my-2">
+                    <label asp-for="Pizza.PizzaName"></label>
+                    <input type="text" asp-for="Pizza.PizzaName" class="form-control" />
+                    <span asp-validation-for="Pizza.PizzaName" class="text-danger"></span>
+                </div>
+                <div class="col-12 my-2">
+                    <label asp-for="Pizza.PizzaTotalPrice"></label>
+                    <input type="text" asp-for="Pizza.PizzaTotalPrice" class="form-control" />
+                    <span asp-validation-for="Pizza.PizzaTotalPrice" class="text-danger"></span>
+                </div>
+                <div class="col-12 my-2">
+                    <label asp-for="Pizza.Description"></label>
+                    <textarea asp-for="Pizza.Description" class="form-control"></textarea>
+                    <span asp-validation-for="Pizza.Description" class="text-danger"></span>
+                </div>
+                <div class="col-12">
+                    <label>Select Image</label>
+                    <input type="file" class="form-control" asp-for="PizzaImage"/>
+                </div>
+                <div class="col-12 mt-4">
+                    <input type="submit" value="Create" class="btn btn-outline-success rounded-pill" />
+                    <a href="/" class="btn btn-outline-secondary rounded-pill">Return To Menu</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
