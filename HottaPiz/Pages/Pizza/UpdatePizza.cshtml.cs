@@ -38,17 +38,18 @@ namespace HottaPiz.Web.Pages.Pizza
 
             if (PizzaNewImage?.Length > 0 && PizzaNewImage.IsImage())
             {
+
+                //Deleting old image
+                var oldImagePath = PathGenerator.GetSaveAndDeletePizzaImage(Pizza.PizzaImageName);
+                if (System.IO.File.Exists(oldImagePath) && Pizza.PizzaImageName != "Default.png")
+                {
+                    System.IO.File.Delete(oldImagePath);
+                }
+
                 //Creating new image
                 using (var stream = new FileStream(PathGenerator.GetSaveAndDeletePizzaImage(PizzaNewImage.FileName), FileMode.Create))
                 {
                     PizzaNewImage.CopyTo(stream);
-                }
-
-                //Deleting old image
-                var oldImagePath = PathGenerator.GetSaveAndDeletePizzaImage(Pizza.PizzaImageName);
-                if (System.IO.File.Exists(oldImagePath) && Pizza.PizzaImageName!="Default.png")
-                {
-                    System.IO.File.Delete(oldImagePath);
                 }
 
                 Pizza.PizzaImageName = PizzaNewImage.FileName;
