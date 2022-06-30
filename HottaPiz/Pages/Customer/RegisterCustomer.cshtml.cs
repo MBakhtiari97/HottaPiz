@@ -7,7 +7,7 @@ using HottaPiz.Infrastructure.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace HottaPiz.Web.Pages
+namespace HottaPiz.Web.Pages.Customer
 {
     public class RegisterCustomerModel : PageModel
     {
@@ -30,7 +30,12 @@ namespace HottaPiz.Web.Pages
 
         public async Task<IActionResult> OnPostAsync()
         {
-            var newCustomer = new Customer()
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+
+            var newCustomer = new DataLayer.Entities.Customer.Customer()
             {
                 CustomerEmailAddress = Register.CustomerEmailAddress,
                 CustomerFirstAddress = Register.CustomerFirstAddress,
