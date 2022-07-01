@@ -48,7 +48,7 @@ namespace HottaPiz.Web.Pages.Pizza
                 {
                     await _pizzaServices.UpdateCustomPizzaPrice(createdCustomPizzaId, SelectedIngredients);
                     _notyfService.Success("Your Customized Pizza Created Successfully , You Can Order It By My Custom Pizzas Panel !");
-                    return Redirect("/Customer/MyPizzas");
+                    return Redirect("/MyPizzas");
                 }
 
                 _notyfService.Error("Failed To Create Your Pizza !");

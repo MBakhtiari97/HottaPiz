@@ -144,7 +144,7 @@ namespace HottaPiz.Infrastructure.Services.Implementations
         public async Task UpdateCustomPizzaPrice(int pizzaId, List<int> ingredientsIds)
         {
             var pizza = await GetCustomPizzaById(pizzaId);
-            var totalPrice = (decimal)0.00;
+            var totalPrice = (decimal)5.00;
 
             foreach (var id in ingredientsIds)
             {

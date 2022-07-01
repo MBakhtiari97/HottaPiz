@@ -13,5 +13,8 @@ namespace HottaPiz.Infrastructure.Services.Interfaces
         public Task<bool> RegisterCustomer(Customer newCustomer);
         public bool CheckPhoneNumberExists(string phoneNumber);
         public Task<Customer?> GetCustomerForLoginAsync(LoginCustomerVM login);
+        public Task<List<CustomerPizzasVM>> GetAllCustomerPizzasAsync(int customerId);
+        public List<string> GetPizzaIngredientByPizzaId(int pizzaId);
+        public string GetIngredientNameById(int ingredientId);
     }
 }

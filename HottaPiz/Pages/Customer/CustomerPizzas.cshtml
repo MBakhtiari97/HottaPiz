@@ -1,0 +1,36 @@
+﻿@page "/MyPizzas"
+@using HottaPiz.Infrastructure.Utilities.PathTools
+@model HottaPiz.Web.Pages.Customer.CustomerPizzasModel
+@{
+}
+
+<div class="container text-center">
+    <h1>My Customized Pizzas</h1>
+    <a class="btn btn-primary rounded-pill" href="/PizzaCreator">Add Another One</a>
+    <div class="row mt-3">
+        @if (Model.Pizza != null)
+        {
+            @foreach (var pizza in Model.Pizza)
+            {
+                <div class="col-12">
+                    <div class="row border-top p-5">
+                        <div class="col-2">
+                            <img src="@PathGenerator.GetPizzaImageAddress("pizza-three.png")" class="w-75"/>
+                        </div>
+                        <div class="col-9 text-start">
+                            <h3>@pizza.PizzaName</h3>
+                            Contains : 
+                            @foreach (var ingredient in pizza.PizzaIngredients)
+                            {
+                                <span>@ingredient , </span>
+                            }
+                            <span>Pizza Bread</span>
+                            <h4><b>@pizza.PizzaPrice $</b></h4>
+                            <a class="btn btn-primary rounded-pill mb-3">Order</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
