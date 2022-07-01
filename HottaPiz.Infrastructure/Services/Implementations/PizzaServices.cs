@@ -167,5 +167,10 @@ namespace HottaPiz.Infrastructure.Services.Implementations
             return await _context.CustomPizzas
                 .FindAsync(id);
         }
+
+        public decimal GetPizzaPriceByPizzaId(int pizzaId)
+        {
+            return _context.Pizzas.Find(pizzaId).PizzaTotalPrice;
+        }
     }
 }

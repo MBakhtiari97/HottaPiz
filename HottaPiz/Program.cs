@@ -30,6 +30,7 @@ builder.Services.AddDbContext<HottaPizContext>(options =>
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<ICustomerServices,CustomerServices>();
 builder.Services.AddScoped<IPizzaServices,PizzaServices>();
+builder.Services.AddScoped<IOrderServices,OrderServices>();
 
 #endregion
 

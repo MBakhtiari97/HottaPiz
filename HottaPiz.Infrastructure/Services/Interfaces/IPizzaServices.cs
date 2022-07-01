@@ -24,5 +24,7 @@ namespace HottaPiz.Infrastructure.Services.Interfaces
 
         public Task<CustomPizza?> GetCustomPizzaById(int id);
 
+        public decimal GetPizzaPriceByPizzaId(int pizzaId);
+
     }
 }
