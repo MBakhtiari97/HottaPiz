@@ -67,26 +67,31 @@ namespace HottaPiz.Infrastructure.Services.Implementations
                         c.Password == PasswordHelper.EncodePasswordMd5(login.CustomerPassword));
         }
 
-        public async Task<List<CustomerPizzasVM>> GetAllCustomerPizzasAsync(int customerId)
+        public async Task<List<CustomerPizzasVM>?> GetAllCustomerPizzasAsync(int customerId)
         {
-            var pizzas = await _context.CustomPizzas
+            var pizzas = await _context.Pizzas
                 .Where(c => c.CustomerId == customerId).ToListAsync();
 
-            List<CustomerPizzasVM> allPizzas = new List<CustomerPizzasVM>();
+            List<CustomerPizzasVM>? allPizzas = new List<CustomerPizzasVM>();
 
-            foreach (var pizza in pizzas)
+            if (pizzas != null)
             {
-                var customerPizza = new CustomerPizzasVM()
+                foreach (var pizza in pizzas)
                 {
-                    PizzaName = pizza.PizzaName,
-                    PizzaId = pizza.Id,
-                    PizzaPrice = pizza.PizzaTotalPrice,
-                    PizzaIngredients = GetPizzaIngredientByPizzaId(pizza.Id)
-                };
+                    var customerPizza = new CustomerPizzasVM()
+                    {
+                        PizzaName = pizza.PizzaName,
+                        PizzaId = pizza.Id,
+                        PizzaPrice = pizza.PizzaTotalPrice,
+                        PizzaIngredients = GetPizzaIngredientByPizzaId(pizza.Id)
+                    };
 
-                allPizzas.Add(customerPizza);
+                    allPizzas.Add(customerPizza);
+                }
+                return allPizzas;
             }
-            return allPizzas;
+
+            return null;
         }
 
         public List<string> GetPizzaIngredientByPizzaId(int pizzaId)

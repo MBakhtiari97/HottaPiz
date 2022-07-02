@@ -27,10 +27,5 @@ namespace HottaPiz.DataLayer.Entities.Pizza
 
         #endregion
 
-        // #region Relations
-        //
-        // public virtual List<PizzaToIngredients> PizzaToIngredients { get; set; }
-        //
-        // #endregion
     }
 }

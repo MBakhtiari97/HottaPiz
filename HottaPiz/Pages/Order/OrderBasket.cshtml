@@ -1,0 +1,46 @@
+﻿@page "/OrderBasket"
+@using HottaPiz.Infrastructure.Utilities.PathTools
+@model HottaPiz.Web.Pages.Order.OrderBasketModel
+@{
+    ViewData["Title"] = "Order Basket";
+}
+
+<div class="container">
+    <table class="table table-responsive text-center">
+        <thead>
+            <tr>
+                <td>Image</td>
+                <td>Name</td>
+                <td>Count</td>
+                <td>Price</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Order)
+            {
+                <tr>
+                    <td class="col-4">
+                        <img src="@PathGenerator.GetPizzaImageAddress(item.PizzaImageName)" class="w-50" />
+                    </td>
+                    <td>
+                        @item.PizzaName
+                    </td>
+                    <td>
+                        @item.Count
+                    </td>
+                    <td>
+                        @item.PizzaPrice $
+                    </td>
+                    <td>
+                        <a class="btn btn-danger">X</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="text-end">
+        <a class="btn btn-primary rounded-pill">Proceed -></a>
+    </div>
+
+</div>

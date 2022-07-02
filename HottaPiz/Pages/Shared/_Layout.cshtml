@@ -48,7 +48,7 @@
                     </ul>
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <a class="btn btn-primary rounded-pill me-3">Order Basket</a>
+                        <a class="btn btn-primary rounded-pill me-3" href="/OrderBasket">Order Basket</a>
                     }
                     @if(User.Identity.IsAuthenticated && bool.Parse(User.FindFirstValue("IsAdmin")))
                     {

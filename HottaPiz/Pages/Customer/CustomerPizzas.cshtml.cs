@@ -19,7 +19,7 @@ namespace HottaPiz.Web.Pages.Customer
             _notyfService = notyfService;
         }
 
-        public List<CustomerPizzasVM> Pizza { get; set; }
+        public List<CustomerPizzasVM>? Pizza { get; set; }
         public async Task OnGetAsync()
         {
             var customerId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier.ToString()));

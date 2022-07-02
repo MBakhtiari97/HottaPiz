@@ -22,5 +22,6 @@ namespace HottaPiz.DataLayer.Entities.Pizza
         public int PizzaIngredientId { get; set; }
 
         #endregion
+
     }
 }

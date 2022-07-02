@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using HottaPiz.DataLayer.DTOs;
+using HottaPiz.DataLayer.DTOs.Order;
 using HottaPiz.DataLayer.Entities.Order;
+using HottaPiz.DataLayer.Entities.Pizza;
 
 namespace HottaPiz.Infrastructure.Services.Interfaces
 {
@@ -21,5 +22,8 @@ namespace HottaPiz.Infrastructure.Services.Interfaces
         public OrderDetails GetOrderDetailsByOrderIdAndPizzaId(int orderId, int pizzaId);
 
         public Order GetOrderByOrderId(int orderId);
+
+        public Task<List<ShowOrderBasketVM>> GetOrderBasketItems(int customerId);
+        public Pizza GetPizzaByPizzaId(int pizzaId);
     }
 }

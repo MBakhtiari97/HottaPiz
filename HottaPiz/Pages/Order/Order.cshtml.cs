@@ -1,6 +1,6 @@
 using System.Security.Claims;
 using AspNetCoreHero.ToastNotification.Abstractions;
-using HottaPiz.DataLayer.DTOs;
+using HottaPiz.DataLayer.DTOs.Order;
 using HottaPiz.Infrastructure.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -25,7 +25,7 @@ namespace HottaPiz.Web.Pages.Order
         }
 
         public AddToOrderVM Order { get; set; }
-        public async Task OnGet()
+        public async Task<IActionResult> OnGet()
         {
             
             int pizzaId = int.Parse(HttpContext.Request.Query["PizzaId"]);
@@ -49,6 +49,8 @@ namespace HottaPiz.Web.Pages.Order
             {
                 _notyfService.Error("Something Went Wrong !");
             }
+
+            return Redirect("/");
         }
     }
 }

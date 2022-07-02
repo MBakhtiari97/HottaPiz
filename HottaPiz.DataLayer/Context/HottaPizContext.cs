@@ -23,11 +23,9 @@ namespace HottaPiz.DataLayer.Context
         public DbSet<Pizza> Pizzas { get; set; }
         public DbSet<PizzaIngredients> PizzasIngredients { get; set; }
         public DbSet<PizzaToIngredients> PizzaToIngredients { get; set; }
-        public DbSet<MainPizzaToIngredients> MainPizzaToIngredients { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetails> OrdersDetails { get; set; }
         public DbSet<Customer> Customer { get; set; }
-        public DbSet<CustomPizza> CustomPizzas { get; set; }
 
         #endregion
 
@@ -35,17 +33,12 @@ namespace HottaPiz.DataLayer.Context
         {
             #region Relations
 
-            modelBuilder.Entity<MainPizzaToIngredients>()
+            modelBuilder.Entity<PizzaToIngredients>()
                 .HasOne<Pizza>()
                 .WithMany()
                 .HasForeignKey(g => g.PizzaId);
 
             modelBuilder.Entity<PizzaToIngredients>()
-                .HasOne<PizzaIngredients>()
-                .WithMany()
-                .HasForeignKey(g => g.PizzaIngredientId);
-
-            modelBuilder.Entity<MainPizzaToIngredients>()
                 .HasOne<PizzaIngredients>()
                 .WithMany()
                 .HasForeignKey(g => g.PizzaIngredientId);
@@ -65,12 +58,7 @@ namespace HottaPiz.DataLayer.Context
                 .WithMany()
                 .HasForeignKey(o => o.PizzaId);
 
-            modelBuilder.Entity<PizzaToIngredients>()
-                .HasOne<CustomPizza>()
-                .WithMany()
-                .HasForeignKey(o => o.PizzaId);
-
-            modelBuilder.Entity<CustomPizza>()
+            modelBuilder.Entity<Pizza>()
                 .HasOne<Customer>()
                 .WithMany()
                 .HasForeignKey(o => o.CustomerId);

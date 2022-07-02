@@ -124,13 +124,16 @@ namespace HottaPiz.Infrastructure.Services.Implementations
         {
             try
             {
-                var newPizza = new CustomPizza()
+                var newPizza = new Pizza()
                 {
                     CustomerId = pizza.CustomerId,
-                    PizzaName = pizza.PizzaName
+                    PizzaName = pizza.PizzaName,
+                    Description = "This a customized Pizza by customer.",
+                    PizzaBasePrice = 5,
+                    PizzaTotalPrice = 0
                 };
 
-                await _context.CustomPizzas.AddAsync(newPizza);
+                await _context.Pizzas.AddAsync(newPizza);
                 await _context.SaveChangesAsync();
 
                 return newPizza.Id;
@@ -143,7 +146,7 @@ namespace HottaPiz.Infrastructure.Services.Implementations
 
         public async Task UpdateCustomPizzaPrice(int pizzaId, List<int> ingredientsIds)
         {
-            var pizza = await GetCustomPizzaById(pizzaId);
+            var pizza = await GetPizzaByIdAsync(pizzaId);
             var totalPrice = (decimal)5.00;
 
             foreach (var id in ingredientsIds)
@@ -162,9 +165,9 @@ namespace HottaPiz.Infrastructure.Services.Implementations
                 .IngredientPrice;
         }
 
-        public async Task<CustomPizza?> GetCustomPizzaById(int id)
+        public async Task<Pizza?> GetPizzaByIdAsync(int id)
         {
-            return await _context.CustomPizzas
+            return await _context.Pizzas
                 .FindAsync(id);
         }
 

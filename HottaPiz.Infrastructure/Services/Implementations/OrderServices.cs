@@ -4,10 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HottaPiz.DataLayer.Context;
-using HottaPiz.DataLayer.DTOs;
+using HottaPiz.DataLayer.DTOs.Order;
 using HottaPiz.DataLayer.Entities.Order;
+using HottaPiz.DataLayer.Entities.Pizza;
 using HottaPiz.Infrastructure.Services.Interfaces;
 using HottaPiz.Infrastructure.Utilities.Generator;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 
 namespace HottaPiz.Infrastructure.Services.Implementations
 {
@@ -85,7 +88,7 @@ namespace HottaPiz.Infrastructure.Services.Implementations
                     return true;
                 }
             }
-            catch 
+            catch
             {
                 return false;
             }
@@ -112,7 +115,7 @@ namespace HottaPiz.Infrastructure.Services.Implementations
         public OrderDetails GetOrderDetailsByOrderIdAndPizzaId(int orderId, int pizzaId)
         {
             return _context.OrdersDetails
-                .Single(od => 
+                .Single(od =>
                     od.OrderId == orderId && od.PizzaId == pizzaId);
         }
 
@@ -120,6 +123,45 @@ namespace HottaPiz.Infrastructure.Services.Implementations
         {
             return _context.Orders
                 .Find(orderId);
+        }
+
+        public async Task<List<ShowOrderBasketVM>> GetOrderBasketItems(int customerId)
+        {
+            var orderId = GetCustomerOpenOrderId(customerId);
+            var orderDetails = await _context.OrdersDetails
+                .Where(od => od.OrderId == orderId)
+                .ToListAsync();
+
+            var orderRequiredItems = new List<OrderBasketItemsVM>();
+            foreach (var item in orderDetails)
+            {
+                var pizza = GetPizzaByPizzaId(item.PizzaId);
+                orderRequiredItems.Add(new OrderBasketItemsVM()
+                {
+                    pizzas = pizza,
+                    OrderDetails = item
+                });
+            }
+
+            var showOrderBasket = new List<ShowOrderBasketVM>();
+            foreach (var item in orderRequiredItems)
+            {
+                showOrderBasket.Add(new ShowOrderBasketVM()
+                {
+                    PizzaImageName = item.pizzas.PizzaImageName,
+                    Count = item.OrderDetails.Count,
+                    PizzaId = item.OrderDetails.PizzaId,
+                    PizzaName = item.pizzas.PizzaName,
+                    PizzaPrice = item.OrderDetails.Price*item.OrderDetails.Count
+                });
+            }
+
+            return showOrderBasket;
+        }
+
+        public Pizza GetPizzaByPizzaId(int pizzaId)
+        {
+            return _context.Pizzas.Find(pizzaId);
         }
     }
 }
