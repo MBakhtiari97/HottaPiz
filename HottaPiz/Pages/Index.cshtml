@@ -33,6 +33,7 @@
                     @if(User.Identity.IsAuthenticated && bool.Parse(User.FindFirstValue("IsAdmin")))
                     {
                     <a class="btn rounded-pill btn-success" href="/Pizza/Update/@pizza.Id">Update Pizza</a>
+                    <a class="btn rounded-pill btn-danger" href="/Pizza/Remove/@pizza.Id">Remove Pizza</a>
                     }
                 </div>
             }

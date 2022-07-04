@@ -184,5 +184,20 @@ namespace HottaPiz.Infrastructure.Services.Implementations
             return _context.Pizzas.Find(pizzaId).PizzaTotalPrice;
         }
 
+        public async Task<bool> RemovePizzaByPizzaIdAsync(int pizzaId)
+        {
+            try
+            {
+                var pizza = await GetPizzaByIdAsync(pizzaId);
+                pizza.IsDelete = true;
+                await _context.SaveChangesAsync();
+
+                return true;
+            }
+            catch 
+            {
+                return false;
+            }
+        }
     }
 }

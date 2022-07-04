@@ -22,7 +22,7 @@ namespace HottaPiz.Web.Pages.Order
         public async Task<IActionResult> OnGet()
         {
             var customerId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier.ToString()));
-            var pizzaId = int.Parse(HttpContext.Request.Query["PizzaId"]); ;
+            var pizzaId = int.Parse(HttpContext.Request.Query["PizzaId"]);
             if (await _ordertServices.RemovePizzaFromOrderBasket(customerId, pizzaId))
             {
                 _notyfService.Success("Successfully Done !");
