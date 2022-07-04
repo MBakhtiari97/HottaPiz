@@ -20,6 +20,13 @@ namespace HottaPiz.Infrastructure.Services.Implementations
             _context = context;
         }
 
+        public async Task<List<Pizza>> GetAllPizzasAsync()
+        {
+            return await _context.Pizzas
+                .Where(p => !p.IsCustomPizza)
+                .ToListAsync();
+        }
+
         public async Task<bool> UpdatePizzaAsync(UpdatePizzaVM pizzaDetails)
         {
             try
@@ -130,7 +137,8 @@ namespace HottaPiz.Infrastructure.Services.Implementations
                     PizzaName = pizza.PizzaName,
                     Description = "This a customized Pizza by customer.",
                     PizzaBasePrice = 5,
-                    PizzaTotalPrice = 0
+                    PizzaTotalPrice = 0,
+                    IsCustomPizza = true
                 };
 
                 await _context.Pizzas.AddAsync(newPizza);
@@ -175,5 +183,6 @@ namespace HottaPiz.Infrastructure.Services.Implementations
         {
             return _context.Pizzas.Find(pizzaId).PizzaTotalPrice;
         }
+
     }
 }

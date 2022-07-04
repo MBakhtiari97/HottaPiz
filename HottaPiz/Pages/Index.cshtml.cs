@@ -1,4 +1,5 @@
 ﻿using HottaPiz.DataLayer.Repositories.Interfaces;
+using HottaPiz.Infrastructure.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -6,19 +7,19 @@ namespace HottaPiz.Web.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly IGenericRepository<DataLayer.Entities.Pizza.Pizza> _repository;
+        private readonly IPizzaServices _pizzaServices;
 
-        public IndexModel(IGenericRepository<DataLayer.Entities.Pizza.Pizza> repository)
+        public IndexModel(IPizzaServices pizzaServices)
         {
-            _repository = repository;
+            _pizzaServices = pizzaServices;
         }
 
         [BindProperty]
-        public IQueryable<DataLayer.Entities.Pizza.Pizza> Pizzas { get; set; }
+        public List<DataLayer.Entities.Pizza.Pizza> Pizzas { get; set; }
 
-        public void OnGet()
+        public async Task OnGet()
         {
-            Pizzas = _repository.GetAll();
+            Pizzas = await _pizzaServices.GetAllPizzasAsync();
         }
     }
 }

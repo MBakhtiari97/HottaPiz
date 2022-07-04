@@ -127,12 +127,18 @@ namespace HottaPiz.Infrastructure.Services.Implementations
 
         public async Task<List<ShowOrderBasketVM>> GetOrderBasketItems(int customerId)
         {
+            //First getting the customer open order id
             var orderId = GetCustomerOpenOrderId(customerId);
+
+            //Then Getting all order details related to the order id 
             var orderDetails = await _context.OrdersDetails
                 .Where(od => od.OrderId == orderId)
                 .ToListAsync();
 
+            //Creating new list from order basket items view model , that have pizza and order detail properties
             var orderRequiredItems = new List<OrderBasketItemsVM>();
+
+            //Getting and adding order details items and pizzas to create list of order basket items view model 
             foreach (var item in orderDetails)
             {
                 var pizza = GetPizzaByPizzaId(item.PizzaId);
@@ -143,7 +149,10 @@ namespace HottaPiz.Infrastructure.Services.Implementations
                 });
             }
 
+            //Creating new list from required export view model , that is show order basket view model
             var showOrderBasket = new List<ShowOrderBasketVM>();
+
+            //Filling the created list with proper items of orderRequiredItems that we have it already
             foreach (var item in orderRequiredItems)
             {
                 showOrderBasket.Add(new ShowOrderBasketVM()
@@ -152,16 +161,43 @@ namespace HottaPiz.Infrastructure.Services.Implementations
                     Count = item.OrderDetails.Count,
                     PizzaId = item.OrderDetails.PizzaId,
                     PizzaName = item.pizzas.PizzaName,
-                    PizzaPrice = item.OrderDetails.Price*item.OrderDetails.Count
+                    PizzaPrice = item.OrderDetails.Price * item.OrderDetails.Count
                 });
             }
 
+            //Returning list
             return showOrderBasket;
         }
 
         public Pizza GetPizzaByPizzaId(int pizzaId)
         {
             return _context.Pizzas.Find(pizzaId);
+        }
+
+        public async Task<bool> RemovePizzaFromOrderBasket(int customerId, int pizzaId)
+        {
+            try
+            {
+                var orderId = GetCustomerOpenOrderId(customerId);
+
+                var orderDetail = GetOrderDetailsByOrderIdAndPizzaId(orderId, pizzaId);
+                if (orderDetail is { Count: 1 })
+                {
+                    _context.OrdersDetails.Remove(orderDetail);
+                }
+
+                if (orderDetail is { Count: > 1 })
+                {
+                    orderDetail.Count -= 1;
+                }
+
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

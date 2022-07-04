@@ -25,5 +25,6 @@ namespace HottaPiz.Infrastructure.Services.Interfaces
 
         public Task<List<ShowOrderBasketVM>> GetOrderBasketItems(int customerId);
         public Pizza GetPizzaByPizzaId(int pizzaId);
+        public Task<bool> RemovePizzaFromOrderBasket(int customerId, int pizzaId);
     }
 }

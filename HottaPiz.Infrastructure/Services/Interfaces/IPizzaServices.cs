@@ -10,6 +10,7 @@ namespace HottaPiz.Infrastructure.Services.Interfaces
 {
     public interface IPizzaServices
     {
+        public Task<List<Pizza>> GetAllPizzasAsync();
         public Task<bool> UpdatePizzaAsync(UpdatePizzaVM pizzaDetails);
         public UpdatePizzaVM GetUpdatePizzaVMById(int pizzaId);
         public Task<bool> CreatePizzaAsync(CreatePizzaVM pizzaDetails);
@@ -20,6 +21,7 @@ namespace HottaPiz.Infrastructure.Services.Interfaces
         public decimal GetIngredientPriceById(int id);
         public Task<Pizza?> GetPizzaByIdAsync(int id);
         public decimal GetPizzaPriceByPizzaId(int pizzaId);
+       
 
     }
 }
