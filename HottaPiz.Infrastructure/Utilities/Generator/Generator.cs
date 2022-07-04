@@ -14,5 +14,12 @@ namespace HottaPiz.Infrastructure.Utilities.Generator
             var number = rnd.Next(1111111, 9999999);
             return number;
         }
+
+        public static string UniqueTraceCodeGenerator()
+        {
+            return Guid.NewGuid()
+                .ToString()
+                .Replace("-", "");
+        }
     }
 }

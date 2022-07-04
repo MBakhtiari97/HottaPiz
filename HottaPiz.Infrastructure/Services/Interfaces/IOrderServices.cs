@@ -27,5 +27,7 @@ namespace HottaPiz.Infrastructure.Services.Interfaces
         public Pizza GetPizzaByPizzaId(int pizzaId);
         public Task<bool> RemovePizzaFromOrderBasket(int customerId, int pizzaId);
         public decimal GetOrderPrice(int customerId);
+        public string GetCustomerNameByCustomerId(int customerId);
+        public Task FinalizeCustomerOrder(int customerId);
     }
 }

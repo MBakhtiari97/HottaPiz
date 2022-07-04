@@ -103,7 +103,10 @@ namespace HottaPiz.Infrastructure.Services.Implementations
         public int GetCustomerOpenOrderId(int customerId)
         {
             return _context.Orders
-                .Single(o => o.CustomerId == customerId).Id;
+                .Single(o =>
+                    o.CustomerId == customerId &&
+                    !o.IsPaid).Id;
+
         }
 
         public bool CheckOrderHaveSpecificPizza(int orderId, int pizzaId)
@@ -207,6 +210,39 @@ namespace HottaPiz.Infrastructure.Services.Implementations
             var order = GetOrderByOrderId(orderId);
 
             return order.TotalOrderPrice;
+        }
+
+        public string GetCustomerNameByCustomerId(int customerId)
+        {
+            return _context.Customer.Find(customerId).CustomerFirstName;
+        }
+
+        public async Task FinalizeCustomerOrder(int customerId)
+        {
+            //Getting the order id 
+            var orderId = GetCustomerOpenOrderId(customerId);
+
+            //Getting the order 
+            var order = GetOrderByOrderId(orderId);
+
+            //Finalizing the order 
+            order.IsPaid = true;
+            order.PaymentDate = DateTime.Now;
+            order.PaymentGateWay = "PayPal/Visa/MasterCard";
+            order.PaymentTraceCode = Generator.UniqueTraceCodeGenerator();
+
+            //Creating a new open order for customer
+            var newOpenOrder = new Order()
+            {
+                CustomerId = customerId,
+                OrderNumber = Generator.UniqueNumberGenerator(),
+                TotalOrderPrice = 0
+            };
+
+            //Adding new open order
+            _context.Orders.Add(newOpenOrder);
+            //Saving changes
+            await _context.SaveChangesAsync();
         }
     }
 }
