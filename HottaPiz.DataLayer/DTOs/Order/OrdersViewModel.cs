@@ -31,4 +31,15 @@ namespace HottaPiz.DataLayer.DTOs.Order
         public OrderDetails OrderDetails { get; set; }
 
     }
+
+    public class CustomerOrdersHistoryVM
+    {
+        public int OrderId { get; set; }
+        public int OrderNumber { get; set; }
+        public decimal TotalOrderPrice { get; set; }
+        public DateTime? PaymentDate { get; set; }
+        public int CustomerId { get; set; }
+        public string PaymentTraceCode { get; set; } = string.Empty;
+        public string PaymentMethod { get; set; } = string.Empty;
+    }
 }

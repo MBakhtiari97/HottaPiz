@@ -1,0 +1,30 @@
+﻿@page "/MyOrders"
+@model HottaPiz.Web.Pages.Customer.CustomerOrdersModel
+@{
+    ViewData["Title"] = "My Orders History";
+}
+
+<div class="container">
+    <div class="text-center">
+        <h2 class="mb-3">My Order History</h2>
+        <table class="table border">
+            <tr>
+                <th>Order Number</th>
+                <th>Order Total Price</th>
+                <th>Order Payment Date</th>
+                <th>Order Payment Method</th>
+                <th>Order Trace Code</th>
+            </tr>
+            @foreach (var item in Model.Orders)
+            {
+                <tr>
+                    <td><b>HottaPiz-@item.OrderNumber</b></td>
+                    <td><b class="text-primary">@item.TotalOrderPrice $</b></td>
+                    <td>@item.PaymentDate</td>
+                    <td>@item.PaymentMethod</td>
+                    <td class="text-success">@item.PaymentTraceCode</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

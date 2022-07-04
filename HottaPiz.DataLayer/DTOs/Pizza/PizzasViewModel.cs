@@ -65,5 +65,6 @@ namespace HottaPiz.DataLayer.DTOs.Pizza
         [Required(ErrorMessage = "Please Enter {0}")]
         [MaxLength(50, ErrorMessage = "Length Is Too Long")]
         public string PizzaName { get; set; }
+
     }
 }

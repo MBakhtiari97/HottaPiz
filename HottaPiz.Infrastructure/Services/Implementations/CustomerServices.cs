@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using HottaPiz.DataLayer.Context;
 using HottaPiz.DataLayer.DTOs.Customer;
+using HottaPiz.DataLayer.DTOs.Order;
 using HottaPiz.DataLayer.Entities.Customer;
 using HottaPiz.DataLayer.Entities.Pizza;
 using HottaPiz.Infrastructure.Security.PasswordHasher;
@@ -100,7 +101,7 @@ namespace HottaPiz.Infrastructure.Services.Implementations
                 .Where(pti => pti.PizzaId == pizzaId)
                 .Select(pti => pti.PizzaIngredientId).ToList();
 
-            List<string> ingredientsNames = new List<string>() ;
+            List<string> ingredientsNames = new List<string>();
 
             foreach (var id in ingredientIds)
             {
@@ -115,6 +116,27 @@ namespace HottaPiz.Infrastructure.Services.Implementations
         {
             return _context.PizzasIngredients
                 .Single(pi => pi.Id == ingredientId).IngredientTitle;
+        }
+
+        public async Task<List<CustomerOrdersHistoryVM>> GetCustomerOrdersHistory(int customerId)
+        {
+            var ordersHistory = await _context.Orders
+                .Where(o =>
+                    o.CustomerId == customerId &&
+                    o.IsPaid)
+                .Select(o =>
+                new CustomerOrdersHistoryVM()
+                {
+                    CustomerId = customerId,
+                    OrderId = o.Id,
+                    TotalOrderPrice = o.TotalOrderPrice,
+                    OrderNumber = o.OrderNumber,
+                    PaymentDate = o.PaymentDate,
+                    PaymentMethod = o.PaymentGateWay,
+                    PaymentTraceCode = o.PaymentTraceCode
+                }).ToListAsync();
+            return ordersHistory;
+
         }
 
         #endregion

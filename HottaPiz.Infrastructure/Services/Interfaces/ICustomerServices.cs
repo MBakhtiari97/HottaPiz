@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HottaPiz.DataLayer.DTOs.Customer;
+using HottaPiz.DataLayer.DTOs.Order;
 using HottaPiz.DataLayer.Entities.Customer;
 
 namespace HottaPiz.Infrastructure.Services.Interfaces
@@ -16,5 +17,6 @@ namespace HottaPiz.Infrastructure.Services.Interfaces
         public Task<List<CustomerPizzasVM>?> GetAllCustomerPizzasAsync(int customerId);
         public List<string> GetPizzaIngredientByPizzaId(int pizzaId);
         public string GetIngredientNameById(int ingredientId);
+        public Task<List<CustomerOrdersHistoryVM>> GetCustomerOrdersHistory(int customerId);
     }
 }

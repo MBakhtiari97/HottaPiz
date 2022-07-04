@@ -38,7 +38,6 @@ namespace HottaPiz.Web.Pages.Pizza
         {
             if (!ModelState.IsValid)
                 return Page();
-
             Pizzas.CustomerId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier.ToString()));
             var createdCustomPizzaId = await _pizzaServices.CreateCustomPizza(Pizzas);
 
