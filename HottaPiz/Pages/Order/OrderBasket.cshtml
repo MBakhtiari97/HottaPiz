@@ -6,8 +6,10 @@
 }
 
 <div class="container">
-    <table class="table table-responsive text-center">
-        <thead>
+  @if (Model.Order.Count!=0)
+    {
+        <table class="table table-responsive text-center">
+            <thead>
             <tr>
                 <td>Image</td>
                 <td>Name</td>
@@ -15,8 +17,8 @@
                 <td>Price</td>
                 <td></td>
             </tr>
-        </thead>
-        <tbody>
+            </thead>
+            <tbody>
             @foreach (var item in Model.Order)
             {
                 <tr>
@@ -37,10 +39,20 @@
                     </td>
                 </tr>
             }
-        </tbody>
-    </table>
-    <div class="text-end">
-        <a class="btn btn-primary rounded-pill">Proceed -></a>
-    </div>
+            </tbody>
+        </table>
+        <div class="text-end">
+            <span class="text-start">Total Invoice Price:</span>
+            <span><b>@Model.OrderTotalPrice $</b></span><br/>
+            <a class="btn btn-primary rounded-pill mt-3">Proceed -></a>
+        </div>
 
+    }
+  else
+  {
+      <div class="text-center">
+          <h2>Your Order Basket Is Empty !</h2>
+          <a class="btn btn-outline-primary rounded-pill" href="/">Let Order Some Yummie's</a>
+      </div>
+  }
 </div>

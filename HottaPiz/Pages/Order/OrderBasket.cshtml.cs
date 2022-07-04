@@ -18,10 +18,15 @@ namespace HottaPiz.Web.Pages.Order
         [BindProperty]
         public List<ShowOrderBasketVM> Order { get; set; }
 
+        [BindProperty]
+        public decimal OrderTotalPrice { get; set; }
+
         public async Task OnGet()
         {
             var customerId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier.ToString()));
             Order = await _orderServices.GetOrderBasketItems(customerId);
+
+            OrderTotalPrice = _orderServices.GetOrderPrice(customerId);
         }
     }
 }

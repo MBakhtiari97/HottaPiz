@@ -179,8 +179,9 @@ namespace HottaPiz.Infrastructure.Services.Implementations
             try
             {
                 var orderId = GetCustomerOpenOrderId(customerId);
-
+                var order = GetOrderByOrderId(orderId);
                 var orderDetail = GetOrderDetailsByOrderIdAndPizzaId(orderId, pizzaId);
+
                 if (orderDetail is { Count: 1 })
                 {
                     _context.OrdersDetails.Remove(orderDetail);
@@ -190,7 +191,7 @@ namespace HottaPiz.Infrastructure.Services.Implementations
                 {
                     orderDetail.Count -= 1;
                 }
-
+                order.TotalOrderPrice -= orderDetail.Price;
                 await _context.SaveChangesAsync();
                 return true;
             }
@@ -198,6 +199,14 @@ namespace HottaPiz.Infrastructure.Services.Implementations
             {
                 return false;
             }
+        }
+
+        public decimal GetOrderPrice(int customerId)
+        {
+            var orderId = GetCustomerOpenOrderId(customerId);
+            var order = GetOrderByOrderId(orderId);
+
+            return order.TotalOrderPrice;
         }
     }
 }
