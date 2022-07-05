@@ -1,0 +1,67 @@
+﻿@page "/Admin/ManageCustomers"
+@model HottaPiz.Web.Pages.Admin.ManageCustomersIndexModel
+@{
+    ViewData["Title"] = "Manage Customers";
+}
+
+<div class="container">
+    <div class="text-center">
+        @if (Model.Customer.Count > 0)
+        {
+            <table class="table table-striped table-responsive border">
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email Address</th>
+                        <th>Phone Number</th>
+                        <th>Register Date</th>
+                        <th>First Address Line</th>
+                        <th>Second Address Line</th>
+                        <th>Admin Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Customer)
+                    {
+                        <tr>
+                            <td>@item.CustomerFirstName</td>
+                            <td>@item.CustomerLastName</td>
+                            <td>@item.CustomerEmailAddress</td>
+                            <td>@item.CustomerPhoneNumber</td>
+                            <td>@item.RegisterDate.Value.ToShortDateString()</td>
+                            <td>@item.CustomerFirstAddress</td>
+                            <td>@item.CustomerSecondAddress</td>
+                            <td>
+                                @switch (@item.IsAdmin)
+                                {
+                                    case true:
+                                        <p class="text-success">
+                                            Yes!
+                                        </p>
+                                        break;
+                                    case false:
+                                        <p class="text-danger">
+                                            No!
+                                        </p>
+                                        break;
+                                }
+                            </td>
+                            <td>
+                                <a class="btn btn-outline-warning rounded-pill btn-sm btn-group" href="/Admin/ManageCustomer/Update/@item.CustomerId">Update Customer</a>
+                                <a class="btn btn-outline-danger rounded-pill btn-sm btn-group mt-2" href="/Admin/ManageCustomer/Remove/@item.CustomerId">Remove Customer</a>
+                                <a class="btn btn-outline-primary rounded-pill btn-sm btn-group mt-2" href="/Admin/ManageCustomer/Orders/@item.CustomerId">Orders History</a>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <h2>Not Found Any User</h2>
+        }
+    </div>
+</div>

@@ -18,5 +18,11 @@ namespace HottaPiz.Infrastructure.Services.Interfaces
         public List<string> GetPizzaIngredientByPizzaId(int pizzaId);
         public string GetIngredientNameById(int ingredientId);
         public Task<List<CustomerOrdersHistoryVM>> GetCustomerOrdersHistory(int customerId);
+
+        #region Admin
+
+        public Task<List<ManageCustomerVM>> GetCustomersForManaging();
+
+        #endregion
     }
 }

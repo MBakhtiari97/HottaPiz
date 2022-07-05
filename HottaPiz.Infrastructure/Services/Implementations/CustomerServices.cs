@@ -139,6 +139,29 @@ namespace HottaPiz.Infrastructure.Services.Implementations
 
         }
 
+        #region Admin
+
+        public async Task<List<ManageCustomerVM>> GetCustomersForManaging()
+        {
+            return await _context.Customer
+                    .Select(c =>
+                    new ManageCustomerVM()
+                    {
+                        CustomerFirstName = c.CustomerFirstName,
+                        CustomerPhoneNumber = c.CustomerPhoneNumber,
+                        CustomerEmailAddress = c.CustomerEmailAddress,
+                        CustomerFirstAddress = c.CustomerFirstAddress,
+                        CustomerLastName = c.CustomerLastName,
+                        CustomerId = c.Id,
+                        CustomerSecondAddress = c.CustomerSecondAddress,
+                        IsAdmin = c.IsAdmin,
+                        RegisterDate = c.CustomerRegisterDate
+                    }).ToListAsync();
+        }
+
+        #endregion
+
+
         #endregion
 
     }

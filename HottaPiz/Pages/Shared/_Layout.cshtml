@@ -48,11 +48,13 @@
                     </ul>
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <a class="btn btn-primary rounded-pill me-3" href="/OrderBasket">Order Basket</a>
+                        <a class="btn btn-primary rounded-pill btn-sm me-3" href="/OrderBasket">Order Basket</a>
                     }
                     @if(User.Identity.IsAuthenticated && bool.Parse(User.FindFirstValue("IsAdmin")))
                     {
-                        <a class="btn rounded-pill btn-success" href="/Pizza/Create">Create New Pizza</a>
+                        <a class="btn rounded-pill btn-success btn-sm me-1" href="/Pizza/Create">Create New Pizza</a>
+                        <a class="btn rounded-pill btn-success btn-sm me-1" href="/Admin/ManageCustomers">ManageCustomers</a>
+                        <a class="btn rounded-pill btn-success btn-sm" href="/Admin/ManageOrders">Orders History</a>
                     }
                 </div>
             </div>

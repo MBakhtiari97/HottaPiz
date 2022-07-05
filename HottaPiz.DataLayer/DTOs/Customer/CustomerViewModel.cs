@@ -77,4 +77,17 @@ namespace HottaPiz.DataLayer.DTOs.Customer
         public List<string> PizzaIngredients { get; set; }
     }
 
+    public class ManageCustomerVM
+    {
+        public int CustomerId { get; set; }
+        public string CustomerFirstName { get; set; }
+        public string CustomerLastName { get; set; }
+        public string CustomerPhoneNumber { get; set; }
+        public string? CustomerEmailAddress { get; set; }
+        public string CustomerFirstAddress { get; set; }
+        public string? CustomerSecondAddress { get; set; }
+        public DateTime? RegisterDate { get; set; }
+        public bool? IsAdmin { get; set; }
+    }
+
 }
