@@ -14,12 +14,16 @@
             {
                 <div class="col-12">
                     <div class="row border-top p-5">
+
                         <div class="col-2">
-                            <img src="@PathGenerator.GetPizzaImageAddress("pizza-three.png")" class="w-75"/>
+                            <a href="/Pizza/@pizza.PizzaId" class="text-white text-decoration-none">
+                                <img src="@PathGenerator.GetPizzaImageAddress("pizza-three.png")" class="w-75" />
+                            </a>
                         </div>
+
                         <div class="col-9 text-start">
                             <h3>@pizza.PizzaName</h3>
-                            Contains : 
+                            Contains :
                             @foreach (var ingredient in pizza.PizzaIngredients)
                             {
                                 <span>@ingredient , </span>

@@ -26,14 +26,16 @@
             @foreach (var pizza in Model.Pizzas)
             {
                 <div class="col-4 my-5">
-                    <img src="@PathGenerator.GetPizzaImageAddress(pizza.PizzaImageName)" alt="@pizza.PizzaName" class="w-100"/>
-                    <h4 class="my-4"><b>@pizza.PizzaName</b></h4>
+                    <a href="/Pizza/@pizza.Id" class="text-white text-decoration-none">
+                        <img src="@PathGenerator.GetPizzaImageAddress(pizza.PizzaImageName)" alt="@pizza.PizzaName" class="w-100"/>
+                        <h4 class="my-4"><b>@pizza.PizzaName</b></h4>
+                    </a>
                     <h5 class="my-4"><b>@pizza.PizzaTotalPrice $</b></h5>
                     <a class="btn rounded-pill btn-primary" href="/AddToOrderBasket?PizzaId=@pizza.Id">Add To Order</a>
-                    @if(User.Identity.IsAuthenticated && bool.Parse(User.FindFirstValue("IsAdmin")))
+                    @if (User.Identity.IsAuthenticated && bool.Parse(User.FindFirstValue("IsAdmin")))
                     {
-                    <a class="btn rounded-pill btn-success" href="/Pizza/Update/@pizza.Id">Update Pizza</a>
-                    <a class="btn rounded-pill btn-danger" href="/Pizza/Remove/@pizza.Id">Remove Pizza</a>
+                        <a class="btn rounded-pill btn-success" href="/Pizza/Update/@pizza.Id">Update Pizza</a>
+                        <a class="btn rounded-pill btn-danger" href="/Pizza/Remove/@pizza.Id">Remove Pizza</a>
                     }
                 </div>
             }

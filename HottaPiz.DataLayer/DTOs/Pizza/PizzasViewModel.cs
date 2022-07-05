@@ -67,4 +67,19 @@ namespace HottaPiz.DataLayer.DTOs.Pizza
         public string PizzaName { get; set; }
 
     }
+
+    public class PizzaDetailsVM
+    {
+        public int pizzaId { get; set; }
+        public string PizzaName { get; set; }
+        public string PizzaImageName { get; set; }
+        public string PizzaDescription { get; set; }
+        public decimal PizzaPrice { get; set; }
+    }
+
+    public class PizzaIngredientsNamesVM
+    {
+        public int IngredientId { get; set; }
+        public string IngredientName { get; set; }
+    }
 }

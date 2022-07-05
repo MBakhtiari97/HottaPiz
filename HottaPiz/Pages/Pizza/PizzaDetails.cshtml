@@ -1,0 +1,41 @@
+﻿@page "/Pizza/{pizzaId}"
+@using HottaPiz.Infrastructure.Utilities.PathTools
+@model HottaPiz.Web.Pages.Pizza.PizzaDetailsModel
+@{
+    ViewData["Title"] = Model.Pizza.PizzaName;
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <img src="@PathGenerator.GetPizzaImageAddress(Model.Pizza.PizzaImageName)" alt="@Model.Pizza.PizzaName" class="w-75" />
+        </div>
+        <div class="col-6 p-5">
+            <h2>@Model.Pizza.PizzaName</h2>
+            <h5>
+                <div class="mt-2">
+                    <b>
+                        Ingredients :
+                    </b>
+                    @foreach (var item in Model.Ingredients)
+                    {
+                        <span>@item.IngredientName ,</span>
+                    }
+                    <span>Bread</span>
+
+                </div>
+                <div class="mt-2">
+                    <b>
+                    Description :
+                    </b>
+                    @Model.Pizza.PizzaDescription
+                </div>
+            </h5>
+            <hr />
+            <h4>Price:<b>@Model.Pizza.PizzaPrice $</b></h4>
+            <a class="btn btn-primary rounded-pill" href="/AddToOrderBasket?PizzaId=@Model.Pizza.pizzaId">Order</a>
+        </div>
+    </div>
+    <div class="col-12">
+    </div>
+</div>

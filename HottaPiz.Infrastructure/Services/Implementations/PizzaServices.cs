@@ -194,10 +194,52 @@ namespace HottaPiz.Infrastructure.Services.Implementations
 
                 return true;
             }
-            catch 
+            catch
             {
                 return false;
             }
+        }
+
+        public async Task<PizzaDetailsVM> GetPizzaDetailsByPizzaIdAsync(int pizzaId)
+        {
+            return await _context.Pizzas
+                .Where(p => p.Id == pizzaId)
+                .Select(p =>
+                    new PizzaDetailsVM()
+                    {
+                        PizzaImageName = p.PizzaImageName,
+                        pizzaId = p.Id,
+                        PizzaDescription = p.Description,
+                        PizzaName = p.PizzaName,
+                        PizzaPrice = p.PizzaTotalPrice
+                    }).SingleAsync();
+        }
+
+        public async Task<List<PizzaIngredientsNamesVM>> GetPizzaIngredientsNamesByPizzaIdAsync(int pizzaId)
+        {
+            //Getting pizza ingredients ids 
+            var pizzaIngredientsIds = await _context.PizzaToIngredients
+                .Where(pti => pti.PizzaId == pizzaId).Select(pti=>pti.PizzaIngredientId)
+                .ToListAsync();
+
+            //Creating a new list of required view model
+            var pizzaIngredients = new List<PizzaIngredientsNamesVM>();
+
+            //Filling the list
+            foreach (var id in pizzaIngredientsIds)
+            {
+                var ingredient = await _context.PizzasIngredients
+                    .FindAsync(id);
+
+                pizzaIngredients.Add(new PizzaIngredientsNamesVM()
+                {
+                    IngredientId = ingredient.Id,
+                    IngredientName = ingredient.IngredientTitle
+                });
+            }
+
+            //Returning view model
+            return pizzaIngredients;
         }
     }
 }

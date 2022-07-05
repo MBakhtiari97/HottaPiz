@@ -22,6 +22,8 @@ namespace HottaPiz.Infrastructure.Services.Interfaces
         public Task<Pizza?> GetPizzaByIdAsync(int id);
         public decimal GetPizzaPriceByPizzaId(int pizzaId);
         public Task<bool> RemovePizzaByPizzaIdAsync(int pizzaId);
+        public Task<PizzaDetailsVM> GetPizzaDetailsByPizzaIdAsync(int pizzaId);
+        public Task<List<PizzaIngredientsNamesVM>> GetPizzaIngredientsNamesByPizzaIdAsync(int pizzaId);
 
     }
 }
