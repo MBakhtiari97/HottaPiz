@@ -1,0 +1,57 @@
+﻿@page "/Admin/ManageCustomer/Update/{customerId}"
+@model HottaPiz.Web.Pages.Admin.Customer.UpdateCustomerModel
+@{
+    ViewData["Title"] = "Update Customer";
+}
+
+<div class="container">
+    <form asp-page="UpdateCustomerModel" method="post">
+        <div class="row">
+            <input type="hidden" asp-for="Customer.CustomerId"/>
+            <div class="col-6 my-1">
+                <label asp-for="Customer.CustomerFirstName"></label>
+                <input type="text" asp-for="Customer.CustomerFirstName" class="form-control" disabled/>
+                <span asp-validation-for="Customer.CustomerFirstName" class="text-danger"></span>
+            </div>
+            <div class="col-6 my-1">
+                <label asp-for="Customer.CustomerLastName"></label>
+                <input type="text" asp-for="Customer.CustomerLastName" class="form-control" disabled/>
+                <span asp-validation-for="Customer.CustomerLastName" class="text-danger"></span>
+            </div>
+            <div class="col-6 my-1">
+                <label asp-for="Customer.CustomerPhoneNumber"></label>
+                <input type="text" asp-for="Customer.CustomerPhoneNumber" class="form-control"/>
+                <span asp-validation-for="Customer.CustomerPhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="col-6 my-1">
+                <label asp-for="Customer.CustomerEmailAddress"></label>
+                <input type="email" asp-for="Customer.CustomerEmailAddress" class="form-control"/>
+                <span asp-validation-for="Customer.CustomerEmailAddress" class="text-danger"></span>
+            </div>
+            <div class="col-6 my-1">
+                <label asp-for="Customer.RegisterDate"></label>
+                <input type="datetime" asp-for="Customer.RegisterDate" class="form-control" disabled/>
+                <span asp-validation-for="Customer.RegisterDate" class="text-danger"></span>
+            </div>
+            <div class="col-6 my-1">
+                <label asp-for="Customer.IsAdmin"></label><br/>
+                <input type="checkbox" asp-for="Customer.IsAdmin"/>
+            </div>
+            <div class="col-6 my-1">
+                <label asp-for="Customer.CustomerFirstAddress"></label>
+                <textarea asp-for="Customer.CustomerFirstAddress" class="form-control" disabled></textarea>
+                <span asp-validation-for="Customer.CustomerFirstAddress" class="text-danger"></span>
+            </div>
+            <div class="col-6 my-1">
+                <label asp-for="Customer.CustomerSecondAddress"></label>
+                <textarea asp-for="Customer.CustomerSecondAddress" class="form-control" disabled></textarea>
+                <span asp-validation-for="Customer.CustomerSecondAddress" class="text-danger"></span>
+            </div>
+            <div class="col-6 my-1">
+                <a class="btn btn-outline-dark rounded-pill" href="/Admin/ManageCustomers">Back To List</a>
+                <button type="submit" class="btn btn-outline-primary rounded-pill">Update Customer Status</button>
+            </div>
+        </div>
+    </form>
+    
+</div>

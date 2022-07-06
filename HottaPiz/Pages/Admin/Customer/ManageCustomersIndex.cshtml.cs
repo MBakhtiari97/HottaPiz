@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace HottaPiz.Web.Pages.Admin
+namespace HottaPiz.Web.Pages.Admin.Customer
 {
     [Authorize]
     public class ManageCustomersIndexModel : PageModel

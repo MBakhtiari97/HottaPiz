@@ -159,6 +159,52 @@ namespace HottaPiz.Infrastructure.Services.Implementations
                     }).ToListAsync();
         }
 
+        public async Task<ManageCustomerVM> GetCustomerForUpdateAsync(int customerId)
+        {
+            var customerInfo = await _context.Customer
+                .Where(c => c.Id == customerId)
+                .Select(c => new ManageCustomerVM()
+                {
+                    CustomerFirstName = c.CustomerFirstName,
+                    CustomerPhoneNumber = c.CustomerPhoneNumber,
+                    CustomerEmailAddress = c.CustomerEmailAddress,
+                    CustomerFirstAddress = c.CustomerFirstAddress,
+                    CustomerId = c.Id,
+                    CustomerSecondAddress = c.CustomerSecondAddress,
+                    IsAdmin = c.IsAdmin,
+                    CustomerLastName = c.CustomerLastName,
+                    RegisterDate = c.CustomerRegisterDate
+                })
+                .SingleAsync();
+
+            return customerInfo;
+        }
+
+        public async Task<bool> UpdateCustomerAsync(ManageCustomerVM customerInfo)
+        {
+            try
+            {
+                var currentCustomer = await getCustomerByIdAsync(customerInfo.CustomerId);
+
+                currentCustomer.CustomerPhoneNumber = customerInfo.CustomerPhoneNumber;
+                currentCustomer.CustomerEmailAddress = customerInfo.CustomerEmailAddress;
+                currentCustomer.IsAdmin = (bool)customerInfo.IsAdmin;
+
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public async Task<Customer> getCustomerByIdAsync(int customerId)
+        {
+            return await _context.Customer
+                .FindAsync(customerId);
+        }
+
         #endregion
 
 

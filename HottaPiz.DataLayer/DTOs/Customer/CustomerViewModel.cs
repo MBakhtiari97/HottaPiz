@@ -77,6 +77,8 @@ namespace HottaPiz.DataLayer.DTOs.Customer
         public List<string> PizzaIngredients { get; set; }
     }
 
+    #region Admin View Models
+
     public class ManageCustomerVM
     {
         public int CustomerId { get; set; }
@@ -87,7 +89,10 @@ namespace HottaPiz.DataLayer.DTOs.Customer
         public string CustomerFirstAddress { get; set; }
         public string? CustomerSecondAddress { get; set; }
         public DateTime? RegisterDate { get; set; }
-        public bool? IsAdmin { get; set; }
+        public bool IsAdmin { get; set; }
     }
+
+    #endregion
+
 
 }
