@@ -75,5 +75,17 @@ namespace HottaPiz.Web.Tests
 
         #endregion
 
+        #region Test Generate Trace Code
+
+        [TestMethod]
+        public void ShouldReturnUniqueTraceCode()
+        {
+            //Act
+            var traceCode = Generator.UniqueTraceCodeGenerator();
+            //Assert
+            Assert.IsNotNull(traceCode);
+        }
+
+        #endregion
     }
 }
