@@ -252,5 +252,38 @@ namespace HottaPiz.Infrastructure.Services.Implementations
                 .OrderByDescending(o=>o.PaymentDate)
                 .ToListAsync();
         }
+
+        public async Task<List<Order>> GetAllOrdersAsync()
+        {
+            return await _context.Orders
+                .Where(o=>o.IsPaid)
+                .OrderByDescending(o=>o.PaymentDate)
+                .ToListAsync();
+        }
+
+        public decimal GetTotalOrdersPrices()
+        {
+            var totalPrice = _context.Orders
+                .Where(o => o.IsPaid)
+                .Sum(o => o.TotalOrderPrice);
+
+            return totalPrice;
+        }
+
+        public async Task<bool> RemoveOrderFromHistory(int orderId)
+        {
+            try
+            {
+                var order = GetOrderByOrderId(orderId);
+                order.IsDelete = true;
+                await _context.SaveChangesAsync();
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }

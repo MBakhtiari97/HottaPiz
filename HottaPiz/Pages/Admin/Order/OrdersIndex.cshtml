@@ -1,0 +1,55 @@
+﻿@page "/Admin/ManageOrders"
+@model HottaPiz.Web.Pages.Admin.Order.OrdersIndexModel
+@{
+    ViewData["Title"] = "Manage Orders";
+}
+
+<div class="container">
+    <div class="text-center">
+        <h1>Manage Orders</h1>
+        
+        @if (Model.Orders.Count > 0)
+        {
+
+            <div class="text-start fw-bolder mb-3 text-primary">
+                <h5> Orders Total Price Until Now : @Model.TotalOrdersPrice $</h5>
+            </div>
+            <table class="table table-striped table-responsive border">
+                <thead>
+                <tr>
+                    <th>Customer Id</th>
+                    <th>Order Id</th>
+                    <th>Order Number</th>
+                    <th>Order Price</th>
+                    <th>Payment Date</th>
+                    <th>Payment GateWay</th>
+                    <th>Payment Trace Code</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in Model.Orders)
+                {
+                    <tr>
+                        <td>@item.CustomerId</td>
+                        <td>@item.Id</td>
+                        <td class="text-primary fw-bold">@item.OrderNumber</td>
+                        <td class="text-success fw-bold">@item.TotalOrderPrice $</td>
+                        <td>@item.PaymentDate</td>
+                        <td>@item.PaymentGateWay</td>
+                        <td class="fw-bold">@item.PaymentTraceCode</td>
+                        <td>
+                            <a class="btn btn-outline-danger rounded-pill btn-sm btn-group mt-2" href="/Admin/ManageOrders/Remove/@item.Id">Remove Order History</a>
+                        </td>
+                    </tr>
+                }
+
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <h2>Not Found Any Order</h2>
+        }
+    </div>
+</div>

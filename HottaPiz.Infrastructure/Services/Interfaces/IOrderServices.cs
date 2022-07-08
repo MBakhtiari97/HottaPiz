@@ -14,7 +14,7 @@ namespace HottaPiz.Infrastructure.Services.Interfaces
         public Task<bool> AddToOrderBasket(AddToOrderVM order);
         public bool CheckCustomerHaveAnOpenOrder(int customerId);
         public int GetCustomerOpenOrderId(int customerId);
-        public bool CheckOrderHaveSpecificPizza(int orderId,int pizzaId);
+        public bool CheckOrderHaveSpecificPizza(int orderId, int pizzaId);
         public OrderDetails GetOrderDetailsByOrderIdAndPizzaId(int orderId, int pizzaId);
         public Order GetOrderByOrderId(int orderId);
         public Task<List<ShowOrderBasketVM>> GetOrderBasketItems(int customerId);
@@ -23,6 +23,16 @@ namespace HottaPiz.Infrastructure.Services.Interfaces
         public decimal GetOrderPrice(int customerId);
         public string GetCustomerNameByCustomerId(int customerId);
         public Task FinalizeCustomerOrder(int customerId);
+
+        #region Admin
         public Task<List<Order>> GetCustomerOrdersAsync(int customerId);
+        public Task<List<Order>> GetAllOrdersAsync();
+        public decimal GetTotalOrdersPrices();
+        public Task<bool> RemoveOrderFromHistory(int orderId);
+
+        #endregion
+
+
+
     }
 }

@@ -156,7 +156,9 @@ namespace HottaPiz.Infrastructure.Services.Implementations
                         CustomerSecondAddress = c.CustomerSecondAddress,
                         IsAdmin = c.IsAdmin,
                         RegisterDate = c.CustomerRegisterDate
-                    }).ToListAsync();
+                    })
+                    .OrderByDescending(c=>c.RegisterDate)
+                    .ToListAsync();
         }
 
         public async Task<ManageCustomerVM> GetCustomerForUpdateAsync(int customerId)

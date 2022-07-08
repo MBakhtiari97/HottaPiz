@@ -6,29 +6,31 @@
 
 <div class="container">
     <div class="text-center">
+        <h1>Customer Orders</h1>
+        <a class="btn btn-sm btn-outline-secondary rounded-pill mb-3" href="/Admin/ManageCustomers">Back To Customers</a>
         @if (Model.Orders.Count > 0)
         {
             <table class="table table-striped table-responsive border">
                 <thead>
-                    <tr>
-                        <th>Order Number</th>
-                        <th>Order Total Price</th>
-                        <th>Order Payment Date</th>
-                        <th>Payment GateWay</th>
-                        <th>Payment Trace Code</th>
-                    </tr>
+                <tr>
+                    <th>Order Number</th>
+                    <th>Order Total Price</th>
+                    <th>Order Payment Date</th>
+                    <th>Payment GateWay</th>
+                    <th>Payment Trace Code</th>
+                </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model.Orders)
-                    {
-                        <tr>
-                            <td>@item.OrderNumber</td>
-                            <td>@item.TotalOrderPrice</td>
-                            <td>@item.PaymentDate</td>
-                            <td>@item.PaymentGateWay</td>
-                            <td>@item.PaymentTraceCode</td>
-                        </tr>
-                    }
+                @foreach (var item in Model.Orders)
+                {
+                    <tr>
+                        <td class="fw-bold text-primary">@item.OrderNumber</td>
+                        <td class="fw-bold text-success">@item.TotalOrderPrice $</td>
+                        <td>@item.PaymentDate</td>
+                        <td>@item.PaymentGateWay</td>
+                        <td class="fw-bold">@item.PaymentTraceCode</td>
+                    </tr>
+                }
                 </tbody>
             </table>
         }
