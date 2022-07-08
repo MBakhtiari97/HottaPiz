@@ -184,7 +184,7 @@ namespace HottaPiz.Infrastructure.Services.Implementations
         {
             try
             {
-                var currentCustomer = await getCustomerByIdAsync(customerInfo.CustomerId);
+                var currentCustomer = await GetCustomerByIdAsync(customerInfo.CustomerId);
 
                 currentCustomer.CustomerPhoneNumber = customerInfo.CustomerPhoneNumber;
                 currentCustomer.CustomerEmailAddress = customerInfo.CustomerEmailAddress;
@@ -199,10 +199,27 @@ namespace HottaPiz.Infrastructure.Services.Implementations
             }
         }
 
-        public async Task<Customer> getCustomerByIdAsync(int customerId)
+        public async Task<Customer> GetCustomerByIdAsync(int customerId)
         {
             return await _context.Customer
                 .FindAsync(customerId);
+        }
+
+        public async Task<bool> RemoveCustomerAsync(int customerId)
+        {
+            try
+            {
+                var customer = await GetCustomerByIdAsync(customerId);
+                customer.IsDelete = true;
+
+                await _context.SaveChangesAsync();
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         #endregion

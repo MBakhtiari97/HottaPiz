@@ -24,7 +24,8 @@ namespace HottaPiz.Infrastructure.Services.Interfaces
         public Task<List<ManageCustomerVM>> GetCustomersForManaging();
         public Task<ManageCustomerVM> GetCustomerForUpdateAsync(int customerId);
         public Task<bool> UpdateCustomerAsync(ManageCustomerVM customerInfo);
-        public Task<Customer> getCustomerByIdAsync(int customerId);
+        public Task<Customer> GetCustomerByIdAsync(int customerId);
+        public Task<bool> RemoveCustomerAsync(int customerId);
 
         #endregion
     }

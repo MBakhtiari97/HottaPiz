@@ -1,0 +1,40 @@
+﻿@page "/Admin/ManageCustomer/Orders/{customerId}"
+@model HottaPiz.Web.Pages.Admin.Customer.CustomerOrdersModel
+@{
+    ViewData["Title"] = "Customer Orders";
+}
+
+<div class="container">
+    <div class="text-center">
+        @if (Model.Orders.Count > 0)
+        {
+            <table class="table table-striped table-responsive border">
+                <thead>
+                    <tr>
+                        <th>Order Number</th>
+                        <th>Order Total Price</th>
+                        <th>Order Payment Date</th>
+                        <th>Payment GateWay</th>
+                        <th>Payment Trace Code</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Orders)
+                    {
+                        <tr>
+                            <td>@item.OrderNumber</td>
+                            <td>@item.TotalOrderPrice</td>
+                            <td>@item.PaymentDate</td>
+                            <td>@item.PaymentGateWay</td>
+                            <td>@item.PaymentTraceCode</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <h2>Cannot Found Any Order</h2>
+        }
+    </div>
+</div>

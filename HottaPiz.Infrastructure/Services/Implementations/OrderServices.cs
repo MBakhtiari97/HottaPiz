@@ -244,5 +244,13 @@ namespace HottaPiz.Infrastructure.Services.Implementations
             //Saving changes
             await _context.SaveChangesAsync();
         }
+
+        public async Task<List<Order>> GetCustomerOrdersAsync(int customerId)
+        {
+            return await _context.Orders
+                .Where(o => o.CustomerId == customerId && o.IsPaid)
+                .OrderByDescending(o=>o.PaymentDate)
+                .ToListAsync();
+        }
     }
 }
