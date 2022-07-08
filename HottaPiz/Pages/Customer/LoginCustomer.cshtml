@@ -6,6 +6,13 @@
 
 <div class="container">
     <div>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <div class="text-center">
+                <h3 class="text-danger text-capitalize">you does not have required permission to access this section !</h3>
+            </div>
+        }
+        
         <form asp-page="LoginCustomerModel" method="post">
             <div class="row">
                 <div class="col-12">
@@ -22,7 +29,7 @@
                     <input type="checkbox" asp-for="Login.RememberMe"/> Remember Me !
                 </div>
                 <div class="col-6 mt-2">
-                   <input type="submit" value="Login" class="btn btn-outline-success rounded-pill"/>
+                    <input type="submit" value="Login" class="btn btn-outline-success rounded-pill"/>
                 </div>
             </div>
         </form>

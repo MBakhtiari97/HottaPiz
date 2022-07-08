@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using AspNetCoreHero.ToastNotification;
 using AspNetCoreHero.ToastNotification.Extensions;
 using HottaPiz.DataLayer.Context;
@@ -76,17 +77,15 @@ app.UseForwardedHeaders(new ForwardedHeadersOptions
 
 app.Use(async (context, next) =>
 {
-    await next();
-    if (context.Response.StatusCode == 404)
+    if (context.Request.Path.StartsWithSegments("/Admin"))
     {
-        context.Request.Path = "/NotFound";
-        await next();
+        if (!context.User.Identity.IsAuthenticated || bool.Parse(context.User.FindFirstValue("IsAdmin")) == false)
+        {
+            context.Response.Redirect("/Login");
+        }
     }
-    if (context.Response.StatusCode == 500)
-    {
-        context.Request.Path = "/ServerError";
-        await next();
-    }
+
+    await next.Invoke();
 });
 
 app.UseHttpsRedirection();
