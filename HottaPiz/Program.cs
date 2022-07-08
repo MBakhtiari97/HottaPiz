@@ -75,18 +75,6 @@ app.UseForwardedHeaders(new ForwardedHeadersOptions
                        ForwardedHeaders.XForwardedProto
 });
 
-app.Use(async (context, next) =>
-{
-    if (context.Request.Path.StartsWithSegments("/Admin"))
-    {
-        if (!context.User.Identity.IsAuthenticated || bool.Parse(context.User.FindFirstValue("IsAdmin")) == false)
-        {
-            context.Response.Redirect("/Login");
-        }
-    }
-
-    await next.Invoke();
-});
 
 app.UseHttpsRedirection();
 
@@ -99,6 +87,19 @@ app.UseNotyf();
 app.UseAuthentication();
 
 app.UseAuthorization();
+
+app.Use(async (context, next) =>
+{
+    if (context.Request.Path.StartsWithSegments("/Admin"))
+    {
+        if (!context.User.Identity.IsAuthenticated || !bool.Parse(context.User.FindFirstValue("IsAdmin")))
+        {
+            context.Response.Redirect("/Login");
+        }
+    }
+
+    await next.Invoke();
+});
 
 app.MapRazorPages();
 

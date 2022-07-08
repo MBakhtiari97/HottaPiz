@@ -52,7 +52,7 @@
                     }
                     @if(User.Identity.IsAuthenticated && bool.Parse(User.FindFirstValue("IsAdmin")))
                     {
-                        <a class="btn rounded-pill btn-success btn-sm me-1" href="/Pizza/Create">Create New Pizza</a>
+                        <a class="btn rounded-pill btn-success btn-sm me-1" href="/Admin/Pizza/Create">Create New Pizza</a>
                         <a class="btn rounded-pill btn-success btn-sm me-1" href="/Admin/ManageCustomers">ManageCustomers</a>
                         <a class="btn rounded-pill btn-success btn-sm" href="/Admin/ManageOrders">Orders History</a>
                     }
