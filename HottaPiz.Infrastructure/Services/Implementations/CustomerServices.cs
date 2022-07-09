@@ -27,8 +27,6 @@ namespace HottaPiz.Infrastructure.Services.Implementations
 
         #endregion
 
-        #region Register
-
         public async Task<bool> RegisterCustomer(Customer newCustomer)
         {
             try
@@ -49,10 +47,6 @@ namespace HottaPiz.Infrastructure.Services.Implementations
                 return false;
             }
         }
-
-        #endregion
-
-        #region Check Phone Number Exists
 
         public bool CheckPhoneNumberExists(string phoneNumber)
         {
@@ -223,9 +217,6 @@ namespace HottaPiz.Infrastructure.Services.Implementations
                 return false;
             }
         }
-
-        #endregion
-
 
         #endregion
 

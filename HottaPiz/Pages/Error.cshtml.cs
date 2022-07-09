@@ -19,10 +19,9 @@ namespace HottaPiz.Pages
             _logger = logger;
         }
 
-        public IActionResult OnGet()
+        public void OnGet()
         {
             RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
-            return Page();
         }
     }
 }
