@@ -13,7 +13,7 @@ namespace HottaPiz.Infrastructure.Services.Interfaces
     {
         #region Register Customer
 
-        public Task<bool> RegisterCustomer(Customer newCustomer);
+        public int RegisterCustomer(RegisterCustomerVM newCustomer);
 
         #endregion
 

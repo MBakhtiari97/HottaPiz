@@ -11,6 +11,12 @@ namespace HottaPiz.Infrastructure.Services.Interfaces
 {
     public interface IOrderServices
     {
+        #region Create First Customer Open Order
+
+        public Task<bool> CreateFirstCustomerOpenOrderAsync(Order newOrder);
+
+        #endregion
+
         #region Add Order To Order Basket
 
         public Task<bool> AddToOrderBasket(AddToOrderVM order);

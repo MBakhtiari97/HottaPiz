@@ -27,25 +27,33 @@ namespace HottaPiz.Infrastructure.Services.Implementations
 
         #endregion
 
-        public async Task<bool> RegisterCustomer(Customer newCustomer)
+        public int RegisterCustomer(RegisterCustomerVM newCustomer)
         {
-            try
+            if (!CheckPhoneNumberExists(newCustomer.CustomerPhoneNumber))
             {
-                if (!CheckPhoneNumberExists(newCustomer.CustomerPhoneNumber))
+                //Creating a new customer
+                var customer = new Customer()
                 {
-                    _context.Customer.Add(newCustomer);
-                    await _context.SaveChangesAsync();
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                    CustomerEmailAddress = newCustomer.CustomerEmailAddress,
+                    CustomerFirstAddress = newCustomer.CustomerFirstAddress,
+                    CustomerLastName = newCustomer.CustomerLastName,
+                    CustomerFirstName = newCustomer.CustomerFirstName,
+                    CustomerPhoneNumber = newCustomer.CustomerPhoneNumber,
+                    CustomerSecondAddress = newCustomer.CustomerSecondAddress,
+                    Password = PasswordHelper.EncodePasswordMd5(newCustomer.CustomerPassword)
+                };
+                //Adding customer
+                _context.Add(customer);
+                _context.SaveChanges();
+
+                //returning customerId
+                return customer.Id;
             }
-            catch
+            else
             {
-                return false;
+                return 0;
             }
+
         }
 
         public bool CheckPhoneNumberExists(string phoneNumber)
@@ -151,7 +159,7 @@ namespace HottaPiz.Infrastructure.Services.Implementations
                         IsAdmin = c.IsAdmin,
                         RegisterDate = c.CustomerRegisterDate
                     })
-                    .OrderByDescending(c=>c.RegisterDate)
+                    .OrderByDescending(c => c.RegisterDate)
                     .ToListAsync();
         }
 

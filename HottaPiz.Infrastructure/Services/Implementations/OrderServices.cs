@@ -94,6 +94,23 @@ namespace HottaPiz.Infrastructure.Services.Implementations
             }
         }
 
+        public async Task<bool> CreateFirstCustomerOpenOrderAsync(Order newOrder)
+        {
+            try
+            {
+                //Adding new order 
+                await _context.Orders.AddAsync(newOrder);
+                await _context.SaveChangesAsync();
+
+                return true;
+            }
+            catch 
+            {
+                return false;
+            }
+           
+        }
+
         public bool CheckCustomerHaveAnOpenOrder(int customerId)
         {
             return _context.Orders

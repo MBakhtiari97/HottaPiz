@@ -4,6 +4,7 @@ using HottaPiz.DataLayer.Entities.Customer;
 using HottaPiz.DataLayer.Repositories.Interfaces;
 using HottaPiz.Infrastructure.Security.PasswordHasher;
 using HottaPiz.Infrastructure.Services.Interfaces;
+using HottaPiz.Infrastructure.Utilities.Generator;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -11,12 +12,14 @@ namespace HottaPiz.Web.Pages.Customer
 {
     public class RegisterCustomerModel : PageModel
     {
-        private ICustomerServices _customerServices;
+        private readonly ICustomerServices _customerServices;
+        private readonly IOrderServices _orderServices;
         private readonly INotyfService _notyfService;
 
-        public RegisterCustomerModel(ICustomerServices customerServices, INotyfService notyfService)
+        public RegisterCustomerModel(ICustomerServices customerServices, IOrderServices orderServices, INotyfService notyfService)
         {
             _customerServices = customerServices;
+            _orderServices = orderServices;
             _notyfService = notyfService;
         }
 
@@ -35,27 +38,35 @@ namespace HottaPiz.Web.Pages.Customer
                 return Page();
             }
 
-            var newCustomer = new DataLayer.Entities.Customer.Customer()
-            {
-                CustomerEmailAddress = Register.CustomerEmailAddress,
-                CustomerFirstAddress = Register.CustomerFirstAddress,
-                CustomerLastName = Register.CustomerLastName,
-                CustomerFirstName = Register.CustomerFirstName,
-                CustomerPhoneNumber = Register.CustomerPhoneNumber,
-                CustomerSecondAddress = Register.CustomerSecondAddress,
-                Password = PasswordHelper.EncodePasswordMd5(Register.CustomerPassword)
-            };
+            //Registering customer
+            var customerId = _customerServices.RegisterCustomer(Register);
 
-            if (await _customerServices.RegisterCustomer(newCustomer))
+            //If registration was successful 
+            if (customerId != 0)
             {
-                _notyfService.Success("Registered Completed !");
-                return Redirect("/Login");
+                //Creating a new order 
+                var newOrder = new DataLayer.Entities.Order.Order()
+                {
+                    CustomerId = customerId,
+                    OrderNumber = Generator.UniqueNumberGenerator(),
+                    TotalOrderPrice = 0
+                };
+
+                //if the new order submitted successfully 
+                if (await _orderServices.CreateFirstCustomerOpenOrderAsync(newOrder))
+                {
+                    _notyfService.Success("Registered Completed !");
+                    return Redirect("/Login");
+                }
+                else
+                {
+                    _notyfService.Error("Something Went Wrong !");
+                    return Page();
+                }
             }
-            else
-            {
-                _notyfService.Error("Phone Number Is Currently Existed!");
-                return Page();
-            }
+
+            _notyfService.Error("Phone Number Is Currently Existed!");
+            return Page();
         }
     }
 }
